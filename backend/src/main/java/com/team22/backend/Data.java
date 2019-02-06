@@ -541,8 +541,6 @@ public class Data {
                     paymentdb.setLease(lid);
                     payMentRepository.save(paymentdb);
                 
-           
-            
 
             System.out.println("\n Spring-Boot Complete");
         };
