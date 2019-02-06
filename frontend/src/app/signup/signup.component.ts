@@ -110,7 +110,7 @@ export class SignupComponent implements OnInit {
         );
     });
         } else {
-                alert('เบอร์โทรไม่ถูกต้อง');
+          this.snackBar.open('เบอร์โทรไม่ถูกต้อง');
           }
 
 
