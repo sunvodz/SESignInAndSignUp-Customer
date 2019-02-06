@@ -1,5 +1,5 @@
 package com.team22.backend.Entity;
-
+import javax.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NonNull;
 import lombok.*;
@@ -19,7 +19,6 @@ public class Province {
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="province_seq")
     @Column(name="PROVINCE_ID",unique = true, nullable = false)
     private Long provinceId;
-    
     private String provinceName;
 
     

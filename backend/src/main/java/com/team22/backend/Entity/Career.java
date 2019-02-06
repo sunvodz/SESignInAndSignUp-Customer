@@ -17,7 +17,6 @@ public class Career {
     @Column(name="Career_ID",unique = true, nullable = false)
 
     private @NotNull Long careerId;
-
     private String careerName;
 
     
