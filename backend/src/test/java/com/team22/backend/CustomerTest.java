@@ -55,6 +55,11 @@ public class CustomerTest {
         try {
             entityManager.persist(customerdb1);
             entityManager.flush();
+            System.out.println(); 
+            System.out.println();   
+            System.out.println("\n\n\n\n\n\n\n\n\n----------------->> 1.Test Customer Insert DataSuccess \n\n\n\n\n\n\n\n\n\n\n");
+            System.out.println(); 
+            System.out.println(); 
         } catch(javax.validation.ConstraintViolationException e) {
             fail("Test Customer Insert DataSuccess Error");
         }
@@ -66,13 +71,41 @@ public class CustomerTest {
 		customerdb2.setCustomerIDs("C8");
 		customerdb2.setCustomerName("KKB");
 		customerdb2.setCustomerPassword("123456");
-		customerdb2.setCustomerPhone("09876543211111"); 
+		customerdb2.setCustomerPhone("0987"); 
         try {
             entityManager.persist(customerdb2);
             entityManager.flush();
             fail("CustomerPhone Size Less Error");
         } catch(javax.validation.ConstraintViolationException e) {
             Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+            System.out.println(); 
+            System.out.println();   
+            System.out.println("\n\n\n\n\n\n\n\n\n" + e + "----------------->> 2 \n\n\n\n\n\n\n\n\n\n\n");
+            System.out.println(); 
+            System.out.println(); 
+            assertEquals(violations.isEmpty(), false);
+            assertEquals(violations.size(), 2);
+        }
+    }
+
+    @Test
+	public void testCustomerPhoneSizeLongThan() {
+		Customer customerdb2 = new Customer();
+		customerdb2.setCustomerIDs("C10");
+		customerdb2.setCustomerName("KKB");
+		customerdb2.setCustomerPassword("123456");
+		customerdb2.setCustomerPhone("098765432111111111"); 
+        try {
+            entityManager.persist(customerdb2);
+            entityManager.flush();
+            fail("CustomerPhone Size Less Error");
+        } catch(javax.validation.ConstraintViolationException e) {
+            Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+            System.out.println(); 
+            System.out.println();   
+            System.out.println("\n\n\n\n\n\n\n\n\n" + e + "----------------->> 3 \n\n\n\n\n\n\n\n\n\n\n");
+            System.out.println(); 
+            System.out.println(); 
             assertEquals(violations.isEmpty(), false);
             assertEquals(violations.size(), 2);
         }
@@ -90,6 +123,11 @@ public class CustomerTest {
             fail("Test Customer Not Null Error");
         } catch(javax.validation.ConstraintViolationException e) {
             Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+            System.out.println(); 
+            System.out.println();   
+            System.out.println("\n\n\n\n\n\n\n\n\n" + e + "----------------->> 4 \n\n\n\n\n\n\n\n\n\n\n");
+            System.out.println(); 
+            System.out.println(); 
             assertEquals(violations.isEmpty(), false);
             assertEquals(violations.size(), 4);
         }
@@ -107,10 +145,46 @@ public class CustomerTest {
             fail("Test CustomerPhone First Zero Error");
         } catch(javax.validation.ConstraintViolationException e) {
             Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+            System.out.println(); 
+            System.out.println();   
+            System.out.println("\n\n\n\n\n\n\n\n\n" + e + "----------------->> 5 \n\n\n\n\n\n\n\n\n\n\n");
+            System.out.println(); 
+            System.out.println(); 
             assertEquals(violations.isEmpty(), false);
             assertEquals(violations.size(), 1);
         }
     }
 
+    @Test
+    //(expected=javax.persistence.PersistenceException.class)
+    public void TestUniqeCustomerIdError() {
+        Customer customerdb4 = new Customer();
+		customerdb4.setCustomerIDs("C9");
+		customerdb4.setCustomerName("KNJN");
+		customerdb4.setCustomerPassword("123456");
+		customerdb4.setCustomerPhone("0987654321"); 
+        entityManager.persist(customerdb4);
+		entityManager.flush();
+		
+		Customer customerdb5 = new Customer();
+		customerdb5.setCustomerIDs("C9");
+		customerdb5.setCustomerName("KKCLO");
+		customerdb5.setCustomerPassword("1234567");
+		customerdb5.setCustomerPhone("0987654321"); 
+        try{
+            entityManager.persist(customerdb5);
+            entityManager.flush();
+        }catch(javax.persistence.PersistenceException e) {
+            System.out.println(); 
+            System.out.println();   
+            System.out.println("\n\n\n\n\n\n\n\n\n" + e + "----------------->> 6 \n\n\n\n\n\n\n\n\n\n\n");
+            System.out.println(); 
+            System.out.println(); 
+
+
+        }
+        
+
+    }
 }
 
