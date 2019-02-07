@@ -57,6 +57,7 @@ export class SignupComponent implements OnInit {
   }
   SignUp() {
     const rex = new RegExp('0');
+    const address = new RegExp('[A-Za-z\w0-9\d]{2,100}');
     this.customer.customerPhone.charAt(0);
     console.log(this.customer.customerPhone.charAt(0));
     if (
@@ -78,16 +79,16 @@ export class SignupComponent implements OnInit {
       } else {
 
           if (rex.test(this.customer.customerPhone)) {
-            this.httpClient.post('http://localhost:8080/customerSignup/' + this.customer.customerIDs + '/'
-            + this.customer.customerPassword + '/' + this.customer.customerName +
-        '/' + this.customer.customerPhone + '/' + this.customer.customerGender +
-        '/' + this.pipe.transform(this.customer.customerBirthday, 'dd:MM:yyyy') + '/' +
-        this.customer.customerAddress + '/' +
-        this.customer.career + '/' +
-        this.customer.province, this.customerRegister)
-
-    .subscribe(
-      dataRegister => {
+              if (address.test(this.customer.customerAddress)) {
+              this.httpClient.post('http://localhost:8080/customerSignup/' + this.customer.customerIDs + '/'
+              + this.customer.customerPassword + '/' + this.customer.customerName +
+            '/' + this.customer.customerPhone + '/' + this.customer.customerGender +
+            '/' + this.pipe.transform(this.customer.customerBirthday, 'dd:MM:yyyy') + '/' +
+            this.customer.customerAddress + '/' +
+            this.customer.career + '/' +
+            this.customer.province, this.customerRegister)
+            .subscribe(
+          dataRegister => {
           console.log('Post successful', dataRegister);
           localStorage.setItem('customerIDs', JSON.stringify(checkCustomer));
           const dialogRef = this.dialog.open(Signincomplete, {
@@ -98,19 +99,22 @@ export class SignupComponent implements OnInit {
              console.log('Can SignIp');
              this.snackBar.open('ลงทะเบียนสำเร็จ');
           },
-      error => {
-       const dialogRe = this.dialog.open(Signinuncomplete, {
+          error => {
+         const dialogRe = this.dialog.open(Signinuncomplete, {
          width: '500px'
-       });
-       dialogRe.afterClosed().subscribe(result => {
+         });
+         dialogRe.afterClosed().subscribe(result => {
          console.log('Can Not SignIp');
-       });
+         });
           console.log('Error', error);
         }
         );
     });
+            } else {
+              this.snackBar.open('ที่อยู่ต้องมีอยู่จริง ความยาวไม่ถูกต้อง');
+            }
         } else {
-          this.snackBar.open('เบอร์โทรไม่ถูกต้อง');
+          this.snackBar.open('เบอร์โทรไม่ถูกต้อง ต้องเท่ากับ 10 ตัว และ ตัวเลขเป็นเลข 0');
           }
 
 
