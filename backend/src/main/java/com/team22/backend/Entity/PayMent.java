@@ -23,7 +23,7 @@ public class PayMent {
 
     @NotNull(message="TypePay Null")      
     @Pattern(regexp = "[RSB]\\w{6}")
-    @Size(min = 7, max = 7)
+    @Size(min = 7 , max = 7)
     private String typePay;
 
     @NotNull(message="StatusPay Null")

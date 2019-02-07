@@ -30,14 +30,17 @@ public class Customer {
 
     @NotNull(message="CustomerPhone Null")
     @Pattern(regexp = "([0]\\d{9})")
-    @Size(min = 10, max = 10)
+    @Size(max = 10)
     private String customerPhone;
 
+    @NotNull(message="CustomerGender Null")
     private String customerGender;
 
     @NotNull(message="CustomerBirthday Null")
     private LocalDate customerBirthday;
 
+    @NotNull(message="CustomerAddress Null")
+    @Size(min = 2 , max = 100)
     private String customerAddress;
 
 

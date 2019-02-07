@@ -50,15 +50,15 @@ public class PaymentTest {
 	
     @Test
 	public void testPayMentInsertDataSuccess() {
-        PayMent paymentdb = new PayMent();
+        PayMent paymentdb1 = new PayMent();
         Date paydate = new Date();
         Customer c1 = customerRepository.findByCusId(1L);
-        paymentdb.setTypePay("Renting");
-        paymentdb.setStatusPay("paid");
-        paymentdb.setDatePay(paydate);
-        paymentdb.setCustomer(c1);
+        paymentdb1.setTypePay("Renting");
+        paymentdb1.setStatusPay("paid");
+        paymentdb1.setDatePay(paydate);
+        paymentdb1.setCustomer(c1);
         try {
-            entityManager.persist(paymentdb);
+            entityManager.persist(paymentdb1);
             entityManager.flush();
             System.out.println(); 
             System.out.println();   
@@ -72,22 +72,22 @@ public class PaymentTest {
 
     @Test
 	public void testTypePaySize() {
-        PayMent paymentdb = new PayMent();
+        PayMent paymentdb2 = new PayMent();
         Date paydate = new Date();
         Customer c2 = customerRepository.findByCusId(2L);
-        paymentdb.setTypePay("Sellingggggg");
-        paymentdb.setStatusPay("paid");
-        paymentdb.setDatePay(paydate);
-        paymentdb.setCustomer(c2);
+        paymentdb2.setTypePay("Sellingggggg");
+        paymentdb2.setStatusPay("paid");
+        paymentdb2.setDatePay(paydate);
+        paymentdb2.setCustomer(c2);
         try {
-            entityManager.persist(paymentdb);
+            entityManager.persist(paymentdb2);
             entityManager.flush();
-            fail("TypePay Size Not Long and Not Less 7 Error");
+            fail("TypePay Size Not Equal 7 Error");
         } catch(javax.validation.ConstraintViolationException e) {
             Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
             System.out.println(); 
             System.out.println();   
-            System.out.println("\n\n\n\n\n\n\n\n\n" + e + "----------------->> 2 .TypePay Size Not Long and Not Less 7 Error \n\n\n\n\n\n\n\n\n\n\n");
+            System.out.println("\n\n\n\n\n\n\n\n\n" + e + "----------------->> 2 .TypePay Size Equal 7 Error \n\n\n\n\n\n\n\n\n\n\n");
             System.out.println(); 
             System.out.println(); 
             assertEquals(violations.isEmpty(), false);
@@ -96,17 +96,19 @@ public class PaymentTest {
     }
     @Test
 	public void testPaymentNotNull() {
-        PayMent paymentdb = new PayMent();
+        PayMent paymentdb3 = new PayMent();
+        
         Customer customer = new Customer();
-        customer.setCustomerIDs(null);
+        customer.setCusId(null);
         entityManager.persist(customer);
-        paymentdb.setPmId(null);
-        paymentdb.setTypePay(null);
-        paymentdb.setStatusPay(null);
-        paymentdb.setDatePay(null);
-        paymentdb.setCustomer(customer);
+        
+        paymentdb3.setPmId(null);
+        paymentdb3.setTypePay(null);
+        paymentdb3.setStatusPay(null);
+        paymentdb3.setDatePay(null);
+        paymentdb3.setCustomer(customer);
         try {
-            entityManager.persist(paymentdb);
+            entityManager.persist(paymentdb3);
             entityManager.flush();
             fail("Test Payment Not Null Error");
             
@@ -118,20 +120,20 @@ public class PaymentTest {
             System.out.println(); 
             System.out.println(); 
             assertEquals(violations.isEmpty(), false);
-            assertEquals(violations.size(), 5);
+            assertEquals(violations.size(), 7);
         }
     }
     @Test
 	public void testPaymentFirstRSB() {
-        PayMent paymentdb = new PayMent();
+        PayMent paymentdb4 = new PayMent();
         Date paydate = new Date();
         Customer c3 = customerRepository.findByCusId(3L);
-        paymentdb.setTypePay("Aooking");
-        paymentdb.setStatusPay("paid");
-        paymentdb.setDatePay(paydate);
-        paymentdb.setCustomer(c3);
+        paymentdb4.setTypePay("Aooking");
+        paymentdb4.setStatusPay("paid");
+        paymentdb4.setDatePay(paydate);
+        paymentdb4.setCustomer(c3);
         try {
-            entityManager.persist(paymentdb);
+            entityManager.persist(paymentdb4);
             entityManager.flush();
             fail("Test Payment First RSB Error");
         } catch(javax.validation.ConstraintViolationException e) {

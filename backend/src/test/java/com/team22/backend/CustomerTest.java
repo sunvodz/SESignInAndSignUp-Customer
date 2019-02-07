@@ -56,6 +56,8 @@ public class CustomerTest {
                     customerdb1.setCustomerPassword("123456");
                     customerdb1.setCustomerPhone("0987654321"); 
                     customerdb1.setCustomerBirthday(dateB1c); 
+                    customerdb1.setCustomerGender("Man"); 
+                    customerdb1.setCustomerAddress("Korat"); 
         try {
             entityManager.persist(customerdb1);
             entityManager.flush();
@@ -70,7 +72,7 @@ public class CustomerTest {
 	}
 	
     @Test
-	public void testCustomerPhoneSizeLessThan() {
+	public void testCustomerPhoneSizeEqual10Than() {
         Customer customerdb2 = new Customer();
         String dateB1 = "20:04:1997";
         DateTimeFormatter lformatterb = DateTimeFormatter.ofPattern("dd:MM:yyyy");
@@ -78,17 +80,19 @@ public class CustomerTest {
 		customerdb2.setCustomerIDs("C8");
 		customerdb2.setCustomerName("KKB");
 		customerdb2.setCustomerPassword("123456");
-        customerdb2.setCustomerPhone("0987"); 
+        customerdb2.setCustomerPhone("0987654321111"); 
         customerdb2.setCustomerBirthday(dateB1c); 
+        customerdb2.setCustomerGender("Women"); 
+        customerdb2.setCustomerAddress("Korat"); 
         try {
             entityManager.persist(customerdb2);
             entityManager.flush();
-            fail("CustomerPhone Size Less Error");
+            fail("CustomerPhone Size Not Equal 10 Error");
         } catch(javax.validation.ConstraintViolationException e) {
             Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
             System.out.println(); 
             System.out.println();   
-            System.out.println("\n\n\n\n\n\n\n\n\n" + e + "----------------->> 2 .CustomerPhone Size Less Error \n\n\n\n\n\n\n\n\n\n\n");
+            System.out.println("\n\n\n\n\n\n\n\n\n" + e + "----------------->> 2 .CustomerPhone Size Not Equal 10 Error \n\n\n\n\n\n\n\n\n\n\n");
             System.out.println(); 
             System.out.println(); 
             assertEquals(violations.isEmpty(), false);
@@ -97,41 +101,76 @@ public class CustomerTest {
     }
 
     @Test
-	public void testCustomerPhoneSizeLongThan() {
-        Customer customerdb2 = new Customer();
+	public void testCustomerAddressLessThan() {
+        Customer customerdb3 = new Customer();
         String dateB1 = "20:04:1997";
         DateTimeFormatter lformatterb = DateTimeFormatter.ofPattern("dd:MM:yyyy");
         LocalDate dateB1c = LocalDate.parse(dateB1, lformatterb);
-		customerdb2.setCustomerIDs("C10");
-		customerdb2.setCustomerName("KKB");
-		customerdb2.setCustomerPassword("123456");
-        customerdb2.setCustomerPhone("098765432111111111"); 
-        customerdb2.setCustomerBirthday(dateB1c); 
+		customerdb3.setCustomerIDs("C10");
+		customerdb3.setCustomerName("KKB");
+		customerdb3.setCustomerPassword("123456");
+        customerdb3.setCustomerPhone("0987654321"); 
+        customerdb3.setCustomerBirthday(dateB1c); 
+        customerdb3.setCustomerGender("Women"); 
+        customerdb3.setCustomerAddress("K");
         try {
-            entityManager.persist(customerdb2);
+            entityManager.persist(customerdb3);
             entityManager.flush();
-            fail("CustomerPhone Size Long Error");
+            fail("CustomerPhone Size Not Equal 10 Long Error");
         } catch(javax.validation.ConstraintViolationException e) {
             Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
             System.out.println(); 
             System.out.println();   
-            System.out.println("\n\n\n\n\n\n\n\n\n" + e + "----------------->> 3.CustomerPhone Size Long Error \n\n\n\n\n\n\n\n\n\n\n");
+            System.out.println("\n\n\n\n\n\n\n\n\n" + e + "----------------->> 3.CustomerPhone Size CustomerAddress Less Error \n\n\n\n\n\n\n\n\n\n\n");
             System.out.println(); 
             System.out.println(); 
             assertEquals(violations.isEmpty(), false);
-            assertEquals(violations.size(), 2);
+            assertEquals(violations.size(), 1);
         }
     }
+
+    @Test
+	public void testCustomerAddressLongThan() {
+        Customer customerdb4 = new Customer();
+        String dateB1 = "20:04:1997";
+        DateTimeFormatter lformatterb = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+        LocalDate dateB1c = LocalDate.parse(dateB1, lformatterb);
+		customerdb4.setCustomerIDs("C10");
+		customerdb4.setCustomerName("KKB");
+		customerdb4.setCustomerPassword("123456");
+        customerdb4.setCustomerPhone("0987654321"); 
+        customerdb4.setCustomerBirthday(dateB1c); 
+        customerdb4.setCustomerGender("Man"); 
+        customerdb4.setCustomerAddress("01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567891");
+        
+        try {
+            entityManager.persist(customerdb4);
+            entityManager.flush();
+            fail("CustomerPhone Size Not Equal 10 Long Error");
+        } catch(javax.validation.ConstraintViolationException e) {
+            Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+            System.out.println(); 
+            System.out.println();   
+            System.out.println("\n\n\n\n\n\n\n\n\n" + e + "----------------->> 3.CustomerPhone Size CustomerAddress Long Error \n\n\n\n\n\n\n\n\n\n\n");
+            System.out.println(); 
+            System.out.println(); 
+            assertEquals(violations.isEmpty(), false);
+            assertEquals(violations.size(), 1);
+        }
+    }
+
     @Test
 	public void testCustomerNotNull() {
-		Customer customerdb3 = new Customer();
-		customerdb3.setCustomerIDs(null);
-		customerdb3.setCustomerName(null);
-		customerdb3.setCustomerPassword(null);
-        customerdb3.setCustomerPhone(null); 
-        customerdb3.setCustomerBirthday(null); 
+		Customer customerdb5 = new Customer();
+		customerdb5.setCustomerIDs(null);
+		customerdb5.setCustomerName(null);
+		customerdb5.setCustomerPassword(null);
+        customerdb5.setCustomerPhone(null); 
+        customerdb5.setCustomerBirthday(null); 
+        customerdb5.setCustomerAddress(null); 
+        customerdb5.setCustomerGender(null); 
         try {
-            entityManager.persist(customerdb3);
+            entityManager.persist(customerdb5);
             entityManager.flush();
             fail("Test Customer Not Null Error");
         } catch(javax.validation.ConstraintViolationException e) {
@@ -142,22 +181,24 @@ public class CustomerTest {
             System.out.println(); 
             System.out.println(); 
             assertEquals(violations.isEmpty(), false);
-            assertEquals(violations.size(), 5);
+            assertEquals(violations.size(), 7);
         }
     }
     @Test
 	public void testCustomerPhoneFirstZero() {
-        Customer customerdb4 = new Customer();
+        Customer customerdb6 = new Customer();
         String dateB1 = "20:04:1997";
         DateTimeFormatter lformatterb = DateTimeFormatter.ofPattern("dd:MM:yyyy");
         LocalDate dateB1c = LocalDate.parse(dateB1, lformatterb);
-		customerdb4.setCustomerIDs("C9");
-		customerdb4.setCustomerName("KKC");
-		customerdb4.setCustomerPassword("123456");
-        customerdb4.setCustomerPhone("9987654321"); 
-        customerdb4.setCustomerBirthday(dateB1c); 
+		customerdb6.setCustomerIDs("C9");
+		customerdb6.setCustomerName("KKC");
+		customerdb6.setCustomerPassword("123456");
+        customerdb6.setCustomerPhone("9987654321"); 
+        customerdb6.setCustomerBirthday(dateB1c); 
+        customerdb6.setCustomerGender("Man"); 
+        customerdb6.setCustomerAddress("Korat");
         try {
-            entityManager.persist(customerdb4);
+            entityManager.persist(customerdb6);
             entityManager.flush();
             fail("Test CustomerPhone First Zero Error");
         } catch(javax.validation.ConstraintViolationException e) {
@@ -175,29 +216,33 @@ public class CustomerTest {
     @Test
     //(expected=javax.persistence.PersistenceException.class)
     public void TestUniqeCustomerIdError() {
-        Customer customerdb4 = new Customer();
+        Customer customerdb7 = new Customer();
         String dateB1 = "20:04:1997";
         DateTimeFormatter lformatterb = DateTimeFormatter.ofPattern("dd:MM:yyyy");
         LocalDate dateB1c = LocalDate.parse(dateB1, lformatterb);
-		customerdb4.setCustomerIDs("C9");
-		customerdb4.setCustomerName("KNJN");
-		customerdb4.setCustomerPassword("123456");
-        customerdb4.setCustomerPhone("0987654321"); 
-        customerdb4.setCustomerBirthday(dateB1c); 
-        entityManager.persist(customerdb4);
+		customerdb7.setCustomerIDs("C9");
+		customerdb7.setCustomerName("KNJN");
+		customerdb7.setCustomerPassword("123456");
+        customerdb7.setCustomerPhone("0987654321"); 
+        customerdb7.setCustomerBirthday(dateB1c); 
+        customerdb7.setCustomerGender("Man"); 
+        customerdb7.setCustomerAddress("Korat");
+        entityManager.persist(customerdb7);
 		entityManager.flush();
 		
-        Customer customerdb5 = new Customer();
+        Customer customerdb8 = new Customer();
         String dateB2 = "20:04:1997";
         DateTimeFormatter lformatterb2 = DateTimeFormatter.ofPattern("dd:MM:yyyy");
         LocalDate dateB2c = LocalDate.parse(dateB2, lformatterb2);
-		customerdb5.setCustomerIDs("C9");
-		customerdb5.setCustomerName("KKCLO");
-		customerdb5.setCustomerPassword("1234567");
-        customerdb5.setCustomerPhone("0987654321"); 
-        customerdb5.setCustomerBirthday(dateB2c); 
+		customerdb8.setCustomerIDs("C9");
+		customerdb8.setCustomerName("KKCLO");
+		customerdb8.setCustomerPassword("1234567");
+        customerdb8.setCustomerPhone("0987654321"); 
+        customerdb8.setCustomerAddress("Korat");
+        customerdb8.setCustomerGender("Man"); 
+        customerdb8.setCustomerBirthday(dateB2c); 
         try{
-            entityManager.persist(customerdb5);
+            entityManager.persist(customerdb8);
             entityManager.flush();
         }catch(javax.persistence.PersistenceException e) {
             System.out.println(); 
