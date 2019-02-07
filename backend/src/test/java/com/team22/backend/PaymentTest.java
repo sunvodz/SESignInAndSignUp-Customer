@@ -53,6 +53,11 @@ public class PaymentTest {
         try {
             entityManager.persist(paymentdb);
             entityManager.flush();
+            System.out.println(); 
+            System.out.println();   
+            System.out.println("\n\n\n\n\n\n\n\n\n----------------->> 1.Test PayMent Insert DataSuccess \n\n\n\n\n\n\n\n\n\n\n");
+            System.out.println(); 
+            System.out.println(); 
         } catch(javax.validation.ConstraintViolationException e) {
             fail("Test PayMent Insert DataSuccess Error");
         }
@@ -69,6 +74,11 @@ public class PaymentTest {
             fail("TypePay Size Less Error");
         } catch(javax.validation.ConstraintViolationException e) {
             Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+            System.out.println(); 
+            System.out.println();   
+            System.out.println("\n\n\n\n\n\n\n\n\n" + e + "----------------->> 2 .TypePay Size Less Error \n\n\n\n\n\n\n\n\n\n\n");
+            System.out.println(); 
+            System.out.println(); 
             assertEquals(violations.isEmpty(), false);
             assertEquals(violations.size(), 1);
         }
@@ -85,6 +95,11 @@ public class PaymentTest {
             fail("Test Payment Not Null Error");
         } catch(javax.validation.ConstraintViolationException e) {
             Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+            System.out.println(); 
+            System.out.println();   
+            System.out.println("\n\n\n\n\n\n\n\n\n" + e + "----------------->> 4.Test Payment Not Null Error \n\n\n\n\n\n\n\n\n\n\n");
+            System.out.println(); 
+            System.out.println(); 
             assertEquals(violations.isEmpty(), false);
             assertEquals(violations.size(), 2);
         }
@@ -96,9 +111,14 @@ public class PaymentTest {
         try {
             entityManager.persist(paymentdb);
             entityManager.flush();
-            fail("Test CustomerPhone First RSB Error");
+            fail("Test Payment First RSB Error");
         } catch(javax.validation.ConstraintViolationException e) {
             Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+            System.out.println(); 
+            System.out.println();   
+            System.out.println("\n\n\n\n\n\n\n\n\n" + e + "----------------->> 5.Test Payment First RSB Error \n\n\n\n\n\n\n\n\n\n\n");
+            System.out.println(); 
+            System.out.println(); 
             assertEquals(violations.isEmpty(), false);
             assertEquals(violations.size(), 1);
         }

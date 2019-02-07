@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {FormControl} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import {DatePipe} from '@angular/common';
+import { DatePipe} from '@angular/common';
 import { SignupService } from '../service/signup.service';
 import { Router } from '@angular/router';
-import {MatDialog , MatDialogRef} from '@angular/material';
-import {MatSnackBar} from '@angular/material';
+import { MatDialog , MatDialogRef } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',

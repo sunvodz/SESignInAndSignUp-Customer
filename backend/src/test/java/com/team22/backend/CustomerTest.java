@@ -80,7 +80,7 @@ public class CustomerTest {
             Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
             System.out.println(); 
             System.out.println();   
-            System.out.println("\n\n\n\n\n\n\n\n\n" + e + "----------------->> 2 \n\n\n\n\n\n\n\n\n\n\n");
+            System.out.println("\n\n\n\n\n\n\n\n\n" + e + "----------------->> 2 .CustomerPhone Size Less Error \n\n\n\n\n\n\n\n\n\n\n");
             System.out.println(); 
             System.out.println(); 
             assertEquals(violations.isEmpty(), false);
@@ -98,12 +98,12 @@ public class CustomerTest {
         try {
             entityManager.persist(customerdb2);
             entityManager.flush();
-            fail("CustomerPhone Size Less Error");
+            fail("CustomerPhone Size Long Error");
         } catch(javax.validation.ConstraintViolationException e) {
             Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
             System.out.println(); 
             System.out.println();   
-            System.out.println("\n\n\n\n\n\n\n\n\n" + e + "----------------->> 3 \n\n\n\n\n\n\n\n\n\n\n");
+            System.out.println("\n\n\n\n\n\n\n\n\n" + e + "----------------->> 3.CustomerPhone Size Long Error \n\n\n\n\n\n\n\n\n\n\n");
             System.out.println(); 
             System.out.println(); 
             assertEquals(violations.isEmpty(), false);
@@ -125,7 +125,7 @@ public class CustomerTest {
             Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
             System.out.println(); 
             System.out.println();   
-            System.out.println("\n\n\n\n\n\n\n\n\n" + e + "----------------->> 4 \n\n\n\n\n\n\n\n\n\n\n");
+            System.out.println("\n\n\n\n\n\n\n\n\n" + e + "----------------->> 4. Test Customer Not Null Error \n\n\n\n\n\n\n\n\n\n\n");
             System.out.println(); 
             System.out.println(); 
             assertEquals(violations.isEmpty(), false);
@@ -147,7 +147,7 @@ public class CustomerTest {
             Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
             System.out.println(); 
             System.out.println();   
-            System.out.println("\n\n\n\n\n\n\n\n\n" + e + "----------------->> 5 \n\n\n\n\n\n\n\n\n\n\n");
+            System.out.println("\n\n\n\n\n\n\n\n\n" + e + "----------------->> 5.Test CustomerPhone First Zero Error \n\n\n\n\n\n\n\n\n\n\n");
             System.out.println(); 
             System.out.println(); 
             assertEquals(violations.isEmpty(), false);
@@ -177,7 +177,7 @@ public class CustomerTest {
         }catch(javax.persistence.PersistenceException e) {
             System.out.println(); 
             System.out.println();   
-            System.out.println("\n\n\n\n\n\n\n\n\n" + e + "----------------->> 6 \n\n\n\n\n\n\n\n\n\n\n");
+            System.out.println("\n\n\n\n\n\n\n\n\n" + e + "----------------->> 6.UniqeCustomerId \n\n\n\n\n\n\n\n\n\n\n");
             System.out.println(); 
             System.out.println(); 
 
