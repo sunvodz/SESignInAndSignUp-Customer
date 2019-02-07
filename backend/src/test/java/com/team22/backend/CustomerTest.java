@@ -47,11 +47,15 @@ public class CustomerTest {
 	
     @Test
 	public void testCustomerInsertDataSuccess() {
-        			Customer customerdb1 = new Customer();
+                    Customer customerdb1 = new Customer();
+                    String dateB1 = "20:04:1997";
+                    DateTimeFormatter lformatterb = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+                    LocalDate dateB1c = LocalDate.parse(dateB1, lformatterb);
                     customerdb1.setCustomerIDs("C7");
                     customerdb1.setCustomerName("KKA");
                     customerdb1.setCustomerPassword("123456");
                     customerdb1.setCustomerPhone("0987654321"); 
+                    customerdb1.setCustomerBirthday(dateB1c); 
         try {
             entityManager.persist(customerdb1);
             entityManager.flush();
@@ -67,11 +71,15 @@ public class CustomerTest {
 	
     @Test
 	public void testCustomerPhoneSizeLessThan() {
-		Customer customerdb2 = new Customer();
+        Customer customerdb2 = new Customer();
+        String dateB1 = "20:04:1997";
+        DateTimeFormatter lformatterb = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+        LocalDate dateB1c = LocalDate.parse(dateB1, lformatterb);
 		customerdb2.setCustomerIDs("C8");
 		customerdb2.setCustomerName("KKB");
 		customerdb2.setCustomerPassword("123456");
-		customerdb2.setCustomerPhone("0987"); 
+        customerdb2.setCustomerPhone("0987"); 
+        customerdb2.setCustomerBirthday(dateB1c); 
         try {
             entityManager.persist(customerdb2);
             entityManager.flush();
@@ -90,11 +98,15 @@ public class CustomerTest {
 
     @Test
 	public void testCustomerPhoneSizeLongThan() {
-		Customer customerdb2 = new Customer();
+        Customer customerdb2 = new Customer();
+        String dateB1 = "20:04:1997";
+        DateTimeFormatter lformatterb = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+        LocalDate dateB1c = LocalDate.parse(dateB1, lformatterb);
 		customerdb2.setCustomerIDs("C10");
 		customerdb2.setCustomerName("KKB");
 		customerdb2.setCustomerPassword("123456");
-		customerdb2.setCustomerPhone("098765432111111111"); 
+        customerdb2.setCustomerPhone("098765432111111111"); 
+        customerdb2.setCustomerBirthday(dateB1c); 
         try {
             entityManager.persist(customerdb2);
             entityManager.flush();
@@ -116,7 +128,8 @@ public class CustomerTest {
 		customerdb3.setCustomerIDs(null);
 		customerdb3.setCustomerName(null);
 		customerdb3.setCustomerPassword(null);
-		customerdb3.setCustomerPhone(null); 
+        customerdb3.setCustomerPhone(null); 
+        customerdb3.setCustomerBirthday(null); 
         try {
             entityManager.persist(customerdb3);
             entityManager.flush();
@@ -129,16 +142,20 @@ public class CustomerTest {
             System.out.println(); 
             System.out.println(); 
             assertEquals(violations.isEmpty(), false);
-            assertEquals(violations.size(), 4);
+            assertEquals(violations.size(), 5);
         }
     }
     @Test
 	public void testCustomerPhoneFirstZero() {
-		Customer customerdb4 = new Customer();
+        Customer customerdb4 = new Customer();
+        String dateB1 = "20:04:1997";
+        DateTimeFormatter lformatterb = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+        LocalDate dateB1c = LocalDate.parse(dateB1, lformatterb);
 		customerdb4.setCustomerIDs("C9");
 		customerdb4.setCustomerName("KKC");
 		customerdb4.setCustomerPassword("123456");
-		customerdb4.setCustomerPhone("9987654321"); 
+        customerdb4.setCustomerPhone("9987654321"); 
+        customerdb4.setCustomerBirthday(dateB1c); 
         try {
             entityManager.persist(customerdb4);
             entityManager.flush();
@@ -159,18 +176,26 @@ public class CustomerTest {
     //(expected=javax.persistence.PersistenceException.class)
     public void TestUniqeCustomerIdError() {
         Customer customerdb4 = new Customer();
+        String dateB1 = "20:04:1997";
+        DateTimeFormatter lformatterb = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+        LocalDate dateB1c = LocalDate.parse(dateB1, lformatterb);
 		customerdb4.setCustomerIDs("C9");
 		customerdb4.setCustomerName("KNJN");
 		customerdb4.setCustomerPassword("123456");
-		customerdb4.setCustomerPhone("0987654321"); 
+        customerdb4.setCustomerPhone("0987654321"); 
+        customerdb4.setCustomerBirthday(dateB1c); 
         entityManager.persist(customerdb4);
 		entityManager.flush();
 		
-		Customer customerdb5 = new Customer();
+        Customer customerdb5 = new Customer();
+        String dateB2 = "20:04:1997";
+        DateTimeFormatter lformatterb2 = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+        LocalDate dateB2c = LocalDate.parse(dateB2, lformatterb2);
 		customerdb5.setCustomerIDs("C9");
 		customerdb5.setCustomerName("KKCLO");
 		customerdb5.setCustomerPassword("1234567");
-		customerdb5.setCustomerPhone("0987654321"); 
+        customerdb5.setCustomerPhone("0987654321"); 
+        customerdb5.setCustomerBirthday(dateB2c); 
         try{
             entityManager.persist(customerdb5);
             entityManager.flush();

@@ -36,6 +36,9 @@ public class PaymentTest {
 	private PayMentRepository payMentRepository;
 
     @Autowired
+    private CustomerRepository customerRepository;
+    
+    @Autowired
     private TestEntityManager entityManager;
 
     private Validator validator;
@@ -48,8 +51,12 @@ public class PaymentTest {
     @Test
 	public void testPayMentInsertDataSuccess() {
         PayMent paymentdb = new PayMent();
+        Date paydate = new Date();
+        Customer c1 = customerRepository.findByCusId(1L);
         paymentdb.setTypePay("Renting");
         paymentdb.setStatusPay("paid");
+        paymentdb.setDatePay(paydate);
+        paymentdb.setCustomer(c1);
         try {
             entityManager.persist(paymentdb);
             entityManager.flush();
@@ -62,37 +69,47 @@ public class PaymentTest {
             fail("Test PayMent Insert DataSuccess Error");
         }
     }
-    
-	
+
     @Test
-	public void testTypePaySizeLessThan() {
+	public void testTypePaySize() {
         PayMent paymentdb = new PayMent();
-        paymentdb.setTypePay("Selling");
+        Date paydate = new Date();
+        Customer c2 = customerRepository.findByCusId(2L);
+        paymentdb.setTypePay("Sellingggggg");
+        paymentdb.setStatusPay("paid");
+        paymentdb.setDatePay(paydate);
+        paymentdb.setCustomer(c2);
         try {
             entityManager.persist(paymentdb);
             entityManager.flush();
-            fail("TypePay Size Less Error");
+            fail("TypePay Size Not Long and Not Less 7 Error");
         } catch(javax.validation.ConstraintViolationException e) {
             Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
             System.out.println(); 
             System.out.println();   
-            System.out.println("\n\n\n\n\n\n\n\n\n" + e + "----------------->> 2 .TypePay Size Less Error \n\n\n\n\n\n\n\n\n\n\n");
+            System.out.println("\n\n\n\n\n\n\n\n\n" + e + "----------------->> 2 .TypePay Size Not Long and Not Less 7 Error \n\n\n\n\n\n\n\n\n\n\n");
             System.out.println(); 
             System.out.println(); 
             assertEquals(violations.isEmpty(), false);
-            assertEquals(violations.size(), 1);
+            assertEquals(violations.size(), 2);
         }
     }
     @Test
 	public void testPaymentNotNull() {
         PayMent paymentdb = new PayMent();
+        Customer customer = new Customer();
+        customer.setCustomerIDs(null);
+        entityManager.persist(customer);
         paymentdb.setPmId(null);
         paymentdb.setTypePay(null);
         paymentdb.setStatusPay(null);
+        paymentdb.setDatePay(null);
+        paymentdb.setCustomer(customer);
         try {
             entityManager.persist(paymentdb);
             entityManager.flush();
             fail("Test Payment Not Null Error");
+            
         } catch(javax.validation.ConstraintViolationException e) {
             Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
             System.out.println(); 
@@ -101,13 +118,18 @@ public class PaymentTest {
             System.out.println(); 
             System.out.println(); 
             assertEquals(violations.isEmpty(), false);
-            assertEquals(violations.size(), 2);
+            assertEquals(violations.size(), 5);
         }
     }
     @Test
 	public void testPaymentFirstRSB() {
         PayMent paymentdb = new PayMent();
-        paymentdb.setTypePay("Booking");
+        Date paydate = new Date();
+        Customer c3 = customerRepository.findByCusId(3L);
+        paymentdb.setTypePay("Aooking");
+        paymentdb.setStatusPay("paid");
+        paymentdb.setDatePay(paydate);
+        paymentdb.setCustomer(c3);
         try {
             entityManager.persist(paymentdb);
             entityManager.flush();

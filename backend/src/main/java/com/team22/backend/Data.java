@@ -208,8 +208,8 @@ public class Data {
                     customerdb2.setCustomerPhone("0987654321"); 
                     customerdb2.setCustomerGender("Man");
                     customerdb2.setCustomerBirthday(dateB2c);
-                    customerdb1.setCareer(career2); 
-                    customerdb1.setProvince(province2);
+                    customerdb2.setCareer(career2); 
+                    customerdb2.setProvince(province2);
                     customerRepository.save(customerdb2);
                 
                     Customer customerdb3 = new Customer();
@@ -221,8 +221,8 @@ public class Data {
                     customerdb3.setCustomerPhone("0987654321"); 
                     customerdb3.setCustomerGender("Man");
                     customerdb3.setCustomerBirthday(dateB1c);
-                    customerdb1.setCareer(career3); 
-                    customerdb1.setProvince(province3);
+                    customerdb3.setCareer(career3); 
+                    customerdb3.setProvince(province3);
                     customerRepository.save(customerdb3);
                 
                     Customer customerdb4 = new Customer();
@@ -234,8 +234,8 @@ public class Data {
                     customerdb4.setCustomerPhone("0987654321"); 
                     customerdb4.setCustomerGender("Man");
                     customerdb4.setCustomerBirthday(dateB2c);
-                    customerdb1.setCareer(career4); 
-                    customerdb1.setProvince(province4);
+                    customerdb4.setCareer(career4); 
+                    customerdb4.setProvince(province4);
                     customerRepository.save(customerdb4);
                 
                     Customer customerdb5 = new Customer();
@@ -247,8 +247,8 @@ public class Data {
                     customerdb5.setCustomerPhone("0987654321"); 
                     customerdb5.setCustomerGender("Man");
                     customerdb5.setCustomerBirthday(dateB1c);
-                    customerdb1.setCareer(career5); 
-                    customerdb1.setProvince(province5);
+                    customerdb5.setCareer(career5); 
+                    customerdb5.setProvince(province5);
                     customerRepository.save(customerdb5);
                 
                     Customer customerdb6 = new Customer();
@@ -260,8 +260,8 @@ public class Data {
                     customerdb6.setCustomerPhone("0987654321"); 
                     customerdb6.setCustomerGender("Man");
                     customerdb6.setCustomerBirthday(dateB2c);
-                    customerdb1.setCareer(career6); 
-                    customerdb1.setProvince(province6);
+                    customerdb6.setCareer(career6); 
+                    customerdb6.setProvince(province6);
                     customerRepository.save(customerdb6);
                 
             Customer c1 = customerRepository.findByCusId(1L);
@@ -532,8 +532,8 @@ public class Data {
 
           
                     PayMent paymentdb = new PayMent();
-                    paymentdb.setPmId(1L);
                     Date paydate = new Date();
+                    paymentdb.setPmId(1L);
                     paymentdb.setTypePay("Renting");
                     paymentdb.setStatusPay("paid");
                     paymentdb.setCustomer(c1);

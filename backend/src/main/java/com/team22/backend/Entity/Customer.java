@@ -9,7 +9,6 @@ import javax.validation.constraints.*;
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
-@Table(name="Customer")
 public class Customer {
     @Id
     @SequenceGenerator(name="customer_seq",sequenceName="customer_seq")
@@ -35,7 +34,10 @@ public class Customer {
     private String customerPhone;
 
     private String customerGender;
+
+    @NotNull(message="CustomerBirthday Null")
     private LocalDate customerBirthday;
+
     private String customerAddress;
 
 

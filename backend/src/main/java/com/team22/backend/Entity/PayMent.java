@@ -15,19 +15,21 @@ public class PayMent {
     @SequenceGenerator(name="payMent_seq",sequenceName="payMent_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="payMent_seq")
     @Column(name="PayMent_ID",unique = true, nullable = false)
-    @NotNull
+    @NotNull(message="PayMent_ID Null")    
     private Long pmId;
 
+    @NotNull(message="DatePay Null")    
     private Date datePay;
 
-    @NotNull(message="typePay Null")      
+    @NotNull(message="TypePay Null")      
     @Pattern(regexp = "[RSB]\\w{6}")
     @Size(min = 7, max = 7)
     private String typePay;
 
-    @NotNull(message="statusPay Null")
+    @NotNull(message="StatusPay Null")
     private String statusPay;
 
+    @NotNull(message="Class Customer Null")
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customerId")
     private Customer customer;
