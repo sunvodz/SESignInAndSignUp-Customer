@@ -18,6 +18,10 @@ public class PayMent {
     @NotNull(message="PayMent_ID Null")    
     private Long pmId;
 
+    @NotNull(message="PaymantIds Null")    
+    @Column(unique = true)
+    private String paymantIds;
+
     @NotNull(message="DatePay Null")    
     private Date datePay;
 

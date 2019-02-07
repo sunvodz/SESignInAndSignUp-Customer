@@ -534,6 +534,7 @@ public class Data {
                     PayMent paymentdb = new PayMent();
                     Date paydate = new Date();
                     paymentdb.setPmId(1L);
+                    paymentdb.setPaymantIds("Payment1");
                     paymentdb.setTypePay("Renting");
                     paymentdb.setStatusPay("paid");
                     paymentdb.setCustomer(c1);
@@ -541,7 +542,6 @@ public class Data {
                     paymentdb.setLease(lid);
                     payMentRepository.save(paymentdb);
                 
-
             System.out.println("\n Spring-Boot Complete");
         };
     }

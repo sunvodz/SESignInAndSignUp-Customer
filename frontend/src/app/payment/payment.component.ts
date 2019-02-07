@@ -1,31 +1,42 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { PaymentService } from '../service/payment.service';
-import {MatTableDataSource} from '@angular/material';
-import {MatDialog , MatDialogRef} from '@angular/material';
-import {MatSnackBar} from '@angular/material';
-  export interface Searchidl {
-    Memberid: String;
-  }
-  export interface Searchids {
-    Memberid: String;
-  }
-  export interface Searchidb {
-    Memberid: String;
-  }
+import { Component, OnInit } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { PaymentService } from "../service/payment.service";
+import { MatTableDataSource } from "@angular/material";
+import { MatDialog, MatDialogRef } from "@angular/material";
+import { MatSnackBar } from "@angular/material";
+export interface Searchidl {
+  Memberid: String;
+}
+export interface Searchids {
+  Memberid: String;
+}
+export interface Searchidb {
+  Memberid: String;
+}
 
 @Component({
-  selector: 'app-payment',
-  templateUrl: './payment.component.html',
-  styleUrls: ['./payment.component.css']
+  selector: "app-payment",
+  templateUrl: "./payment.component.html",
+  styleUrls: ["./payment.component.css"]
 })
-
 export class PaymentComponent implements OnInit {
-  displayedColumnsH: string[] = ['pmId', 'datePay', 'typePay', 'statusPay', 'customerName'];
-  displayedColumns: string[] = ['Memberid', 'UserName', 'Name', 'Price', 'Status'];
+  displayedColumnsH: string[] = [
+    "pmId",
+    "datePay",
+    "typePay",
+    "statusPay",
+    "customerName"
+  ];
+  displayedColumns: string[] = [
+    "Memberid",
+    "UserName",
+    "Name",
+    "Price",
+    "Status"
+  ];
   CurrentDate = new Date();
 
-  filter: '';
+  filter: "";
   members: Array<any>;
   dataSourcel = new MatTableDataSource<Searchidl>(this.members);
   dataSources = new MatTableDataSource<Searchids>(this.members);
@@ -54,45 +65,47 @@ export class PaymentComponent implements OnInit {
   StatusBooking: Array<any>;
 
   userData = {
-    userid : '',
-    username: ''
+    userid: "",
+    username: ""
   };
 
   payments: any = {
-    LeaseId: '',
-    LeaseName: '',
-    LeasePrice: '',
-    LeaseStatus: '',
+    LeaseId: "",
+    LeaseName: "",
+    LeasePrice: "",
+    LeaseStatus: "",
 
-    SellingId: '',
-    SellingName: '',
-    SellingPrice: '',
-    StatusSelling: '',
+    SellingId: "",
+    SellingName: "",
+    SellingPrice: "",
+    StatusSelling: "",
 
-    BookingId: '',
-    BookingStyleName: '',
-    BookingPrice: '',
-    StatusBooking: '',
+    BookingId: "",
+    BookingStyleName: "",
+    BookingPrice: "",
+    StatusBooking: "",
 
-    selectLeaseName: '',
-    selectLeasePrice: '',
-    selectLeaseStatus: '',
+    selectLeaseName: "",
+    selectLeasePrice: "",
+    selectLeaseStatus: "",
 
-    selectSellingName: '',
-    selectSellingPrice: '',
-    selectStatusSelling: '',
+    selectSellingName: "",
+    selectSellingPrice: "",
+    selectStatusSelling: "",
 
-    selectBookingStyleName: '',
-    selectBookingPrice: '',
-    selectStatusBooking: ''
+    selectBookingStyleName: "",
+    selectBookingPrice: "",
+    selectStatusBooking: ""
   };
 
-  constructor(private paymentService: PaymentService, private snackBar: MatSnackBar ,
-     private httpClient: HttpClient , public dialog: MatDialog) { }
-
+  constructor(
+    private paymentService: PaymentService,
+    private snackBar: MatSnackBar,
+    private httpClient: HttpClient,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit() {
-
     this.paymentService.getPayment().subscribe(data => {
       this.payment = data;
       console.log(this.payment);
@@ -116,10 +129,10 @@ export class PaymentComponent implements OnInit {
   }
 
   searchIdl(id) {
-  this.paymentService.getCustomerSearchL(id).subscribe(data => {
-    this.dataSourcel = data;
-    console.log(this.lease);
-  });
+    this.paymentService.getCustomerSearchL(id).subscribe(data => {
+      this.dataSourcel = data;
+      console.log(this.lease);
+    });
   }
   searchIds(id) {
     this.paymentService.getCustomerSearchS(id).subscribe(data => {
@@ -140,146 +153,201 @@ export class PaymentComponent implements OnInit {
     this.payments.selectLeaseName = row.product.productName;
     this.payments.selectLeasePrice = row.product.productPrice;
     this.payments.selectLeaseStatus = row.status;
-    console.log('SelectLease successful');
- }
- viewSelling(row) {
-  this.userData.userid = row.customer.customerIDs;
-  this.userData.username = row.customer.customerName;
-  this.payments.selectSellingId = row.sellingId;
-  this.payments.selectSellingName = row.product.productName;
-  this.payments.selectSellingPrice = row.product.productPrice;
-  this.payments.selectStatusSelling = row.status;
-  console.log('SelectSelling successful');
-}
-viewBooking(row) {
-  this.userData.userid = row.customer.customerIDs;
-  this.userData.username = row.customer.customerName;
-  this.payments.selectBookingId = row.bookingId;
-  this.payments.selectBookingStyleName = row.style.styleName;
-  this.payments.selectBookingPrice = row.style.stylePrice;
-  this.payments.selectStatusBooking = row.status;
-  console.log('SelectBooking successful');
-}
+    console.log("SelectLease successful");
+  }
+  viewSelling(row) {
+    this.userData.userid = row.customer.customerIDs;
+    this.userData.username = row.customer.customerName;
+    this.payments.selectSellingId = row.sellingId;
+    this.payments.selectSellingName = row.product.productName;
+    this.payments.selectSellingPrice = row.product.productPrice;
+    this.payments.selectStatusSelling = row.status;
+    console.log("SelectSelling successful");
+  }
+  viewBooking(row) {
+    this.userData.userid = row.customer.customerIDs;
+    this.userData.username = row.customer.customerName;
+    this.payments.selectBookingId = row.bookingId;
+    this.payments.selectBookingStyleName = row.style.styleName;
+    this.payments.selectBookingPrice = row.style.stylePrice;
+    this.payments.selectStatusBooking = row.status;
+    console.log("SelectBooking successful");
+  }
 
   payLeaseButtom() {
-    if ( this.userData.userid === '' ||
-     this.payments.selectLeaseId === '' ) {
-      this.snackBar.open('ข้อมูลไม่ครบถ้วน');
-} else {
-  this.httpClient.post('http://localhost:8080/payment/' + 'Renting' + '/' + 'paid' + '/' + this.userData.userid +
-                                                    '/' + 0 + '/' + 0 + '/' + this.payments.selectLeaseId, this.payment)
-  .subscribe(
-    data => {
-        console.log('Post successful', data);
-        const dialogRe = this.dialog.open(Paymentcomplete, {
-          width: '500px'
-        });
-        dialogRe.afterClosed().subscribe(result => {
-          window.location.reload();
-          console.log('ชำระสำเร็จ');
-        });
-    },
-    error => {
-        console.log('Error', error);
+    if (this.userData.userid === "" || this.payments.selectLeaseId === "") {
+      this.snackBar.open("ข้อมูลไม่ครบถ้วน");
+    } else {
+      this.httpClient
+        .post(
+          "http://localhost:8080/payment/" +
+            "Renting" +
+            "/" +
+            "paid" +
+            "/" +
+            this.userData.userid +
+            "/" +
+            0 +
+            "/" +
+            0 +
+            "/" +
+            this.payments.selectLeaseId,
+          this.payment
+        )
+        .subscribe(
+          data => {
+            console.log("Post successful", data);
+            const dialogRe = this.dialog.open(Paymentcomplete, {
+              width: "500px"
+            });
+            dialogRe.afterClosed().subscribe(result => {
+              window.location.reload();
+              console.log("ชำระสำเร็จ");
+            });
+          },
+          error => {
+            console.log("Error", error);
+          }
+        );
+      this.httpClient
+        .put(
+          "http://localhost:8080/lease/" +
+            this.payments.selectLeaseId +
+            "/" +
+            "paid",
+          this.lease
+        )
+        .subscribe(
+          data => {
+            if (data) {
+              console.log("Success");
+            }
+          },
+          error => {
+            console.log("error", error);
+          }
+        );
     }
-);
-this.httpClient.put('http://localhost:8080/lease/' + this.payments.selectLeaseId + '/' + 'paid', this.lease)
-    .subscribe(
-      data => {
-        if (data) {
-          console.log('Success');
-        }
-      },
-      error => {
-      console.log('error', error);
-    }
-    );
-
   }
-}
   paySellingButtom() {
-    if (this.userData.userid === '' || this.payments.selectSellingId === '' ) {
-      this.snackBar.open('ข้อมูลไม่ครบถ้วน');
-} else {
-  this.httpClient.post('http://localhost:8080/payment/' + 'Selling' + '/' + 'paid' + '/' + this.userData.userid +
-                                                    '/' + this.payments.selectSellingId + '/' + 0 + '/' + 0, this.payment)
-  .subscribe(
-    data => {
-        console.log('Post successful', data);
-        const dialogRe = this.dialog.open(Paymentcomplete, {
-          width: '500px'
-        });
-        dialogRe.afterClosed().subscribe(result => {
-          window.location.reload();
-          console.log('ชำระสำเร็จ');
-        });
-    },
-    error => {
-        console.log('Error', error);
+    if (this.userData.userid === "" || this.payments.selectSellingId === "") {
+      this.snackBar.open("ข้อมูลไม่ครบถ้วน");
+    } else {
+      this.httpClient
+        .post(
+          "http://localhost:8080/payment/" +
+            "Selling" +
+            "/" +
+            "paid" +
+            "/" +
+            this.userData.userid +
+            "/" +
+            this.payments.selectSellingId +
+            "/" +
+            0 +
+            "/" +
+            0,
+          this.payment
+        )
+        .subscribe(
+          data => {
+            console.log("Post successful", data);
+            const dialogRe = this.dialog.open(Paymentcomplete, {
+              width: "500px"
+            });
+            dialogRe.afterClosed().subscribe(result => {
+              window.location.reload();
+              console.log("ชำระสำเร็จ");
+            });
+          },
+          error => {
+            console.log("Error", error);
+          }
+        );
+      this.httpClient
+        .put(
+          "http://localhost:8080/selling/" +
+            this.payments.selectSellingId +
+            "/" +
+            "paid",
+          this.selling
+        )
+        .subscribe(
+          data => {
+            if (data) {
+              console.log("Success");
+            }
+          },
+          error => {
+            console.log("error", error);
+          }
+        );
     }
-);
-this.httpClient.put('http://localhost:8080/selling/' + this.payments.selectSellingId + '/' + 'paid', this.selling)
-    .subscribe(
-      data => {
-        if (data) {
-          console.log('Success');
-        }
-      },
-      error => {
-      console.log('error', error);
-    }
-    );
-  }
   }
   payBookingButtom() {
-    if (this.userData.userid === '' || this.payments.selectBookingId === '' ) {
-      this.snackBar.open('ข้อมูลไม่ครบถ้วน');
-
-} else {
-this.httpClient.post('http://localhost:8080/payment/' + 'Booking' + '/' + 'paid' + '/' + this.userData.userid +
-                                                  '/' + 0 + '/' + this.payments.selectBookingId + '/' + 0, this.payment)
-.subscribe(
-  data => {
-      console.log('Post successful', data);
-      const dialogRe = this.dialog.open(Paymentcomplete, {
-        width: '500px'
-      });
-      dialogRe.afterClosed().subscribe(result => {
-        window.location.reload();
-        console.log('ชำระสำเร็จ');
-      });
-  },
-  error => {
-      console.log('Error', error);
-  }
-);
-this.httpClient.put('http://localhost:8080/booking/' + this.payments.selectBookingId + '/' + 'paid', this.booking)
-    .subscribe(
-      data => {
-        if (data) {
-          console.log('Success');
-        }
-      },
-      error => {
-      console.log('error', error);
+    if (this.userData.userid === "" || this.payments.selectBookingId === "") {
+      this.snackBar.open("ข้อมูลไม่ครบถ้วน");
+    } else {
+      this.httpClient
+        .post(
+          "http://localhost:8080/payment/" +
+            "Booking" +
+            "/" +
+            "paid" +
+            "/" +
+            this.userData.userid +
+            "/" +
+            0 +
+            "/" +
+            this.payments.selectBookingId +
+            "/" +
+            0,
+          this.payment
+        )
+        .subscribe(
+          data => {
+            console.log("Post successful", data);
+            const dialogRe = this.dialog.open(Paymentcomplete, {
+              width: "500px"
+            });
+            dialogRe.afterClosed().subscribe(result => {
+              window.location.reload();
+              console.log("ชำระสำเร็จ");
+            });
+          },
+          error => {
+            console.log("Error", error);
+          }
+        );
+      this.httpClient
+        .put(
+          "http://localhost:8080/booking/" +
+            this.payments.selectBookingId +
+            "/" +
+            "paid",
+          this.booking
+        )
+        .subscribe(
+          data => {
+            if (data) {
+              console.log("Success");
+            }
+          },
+          error => {
+            console.log("error", error);
+          }
+        );
     }
-    );
+  }
 }
 
-}
-}
-
-
-
-@Component ({
-  selector: 'app-paymentcomplete',
-  templateUrl: './paymentcomplete.html',
+@Component({
+  selector: "app-paymentcomplete",
+  templateUrl: "./paymentcomplete.html"
 })
 // tslint:disable-next-line:component-class-suffix
 export class Paymentcomplete {
-  constructor(
-    public dialogRef: MatDialogRef<Paymentcomplete>
-    ) {}
+  constructor(public dialogRef: MatDialogRef<Paymentcomplete>) {}
   onNoClick(): void {
     this.dialogRef.close();
   }

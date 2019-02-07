@@ -250,11 +250,7 @@ public class CustomerTest {
             System.out.println("\n\n\n\n\n\n\n\n\n" + e + "----------------->> 6.UniqeCustomerId \n\n\n\n\n\n\n\n\n\n\n");
             System.out.println(); 
             System.out.println(); 
-
-
         }
-        
-
     }
 }
 
