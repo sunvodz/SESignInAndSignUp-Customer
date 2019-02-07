@@ -57,7 +57,7 @@ public class CustomerTest {
                     customerdb1.setCustomerPhone("0987654321"); 
                     customerdb1.setCustomerBirthday(dateB1c); 
                     customerdb1.setCustomerGender("Man"); 
-                    customerdb1.setCustomerAddress("Korat"); 
+                    customerdb1.setCustomerAddress("Korat");
         try {
             entityManager.persist(customerdb1);
             entityManager.flush();
@@ -146,12 +146,12 @@ public class CustomerTest {
         try {
             entityManager.persist(customerdb4);
             entityManager.flush();
-            fail("CustomerPhone Size Not Equal 10 Long Error");
+            fail("CustomerAddress Size 100 Long Error");
         } catch(javax.validation.ConstraintViolationException e) {
             Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
             System.out.println(); 
             System.out.println();   
-            System.out.println("\n\n\n\n\n\n\n\n\n" + e + "----------------->> 3.CustomerPhone Size CustomerAddress Long Error \n\n\n\n\n\n\n\n\n\n\n");
+            System.out.println("\n\n\n\n\n\n\n\n\n" + e + "----------------->> 3.CustomerAddress Size Long 100 Error \n\n\n\n\n\n\n\n\n\n\n");
             System.out.println(); 
             System.out.println(); 
             assertEquals(violations.isEmpty(), false);
