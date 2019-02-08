@@ -135,7 +135,7 @@ public class PayMentController {
         Selling sellingid = sellingRepository.findBySellingId(selling);
         newPayMent.setSelling(sellingid);
 
-        Booking styleid = bookingRepository.findBybookingId(style);
+        Booking styleid = bookingRepository.findByBookingId(style);
         newPayMent.setBooking(styleid);
 
         Lease leaseid = leaseRepository.findByLeaseId(lease);
