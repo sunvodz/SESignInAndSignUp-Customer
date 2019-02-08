@@ -39,7 +39,7 @@ public class BookingCancleTest{
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
     }
-    @Test
+   @Test
 	public void testBookingInsertDataSuccess() {
         BookingCancle bc1 = new BookingCancle();
         Date bcDate1 = new Date(); 
@@ -62,7 +62,7 @@ public class BookingCancleTest{
         } catch(javax.validation.ConstraintViolationException e) {
             fail("Test Booking Insert DataSuccess Error");
         }
-    }
+    } 
 	@Test
 	public void testbookingCancleCannotBeNull() {
         BookingCancle bc2 = new BookingCancle();
@@ -72,6 +72,7 @@ public class BookingCancleTest{
         bc2.setBookingCancleDate(null);
         bc2.setBookingCancleStatus(null);
         bc2.setBookingCancleReason(null);
+        bc2.setTypeReason(null);
 
 		try {
             entityManager.persist(bc2);
@@ -85,7 +86,7 @@ public class BookingCancleTest{
             System.out.println();
             System.out.println();
             assertEquals(violations.isEmpty(), false);
-			assertEquals(violations.size(), 5);
+			assertEquals(violations.size(), 6);
 			
         }
     }
@@ -100,6 +101,7 @@ public class BookingCancleTest{
         bc3.setBookingCancleStatus("Cancled");
         bc3.setBookingCancleReason("เพราะล");
         bc3.setBooking(b1);
+        bc3.setTypeReason(typeReasonRepository.findByTypeReasonID(1L));
 
 		try {
             entityManager.persist(bc3);
@@ -126,6 +128,7 @@ public class BookingCancleTest{
         bc4.setBookingCancleStatus("Cancled");
         bc4.setBookingCancleReason("เพราะffjwfwjjfeifiefjiefjiefjgrrgrgrgrgedfsaafsas");
         bc4.setBooking(b1);
+        bc4.setTypeReason(typeReasonRepository.findByTypeReasonID(1L));
 		try {
             entityManager.persist(bc4);
             entityManager.flush();
@@ -152,6 +155,7 @@ public class BookingCancleTest{
         bc5.setBookingCancleStatus("Cancled");
         bc5.setBookingCancleReason("กกดก");
         bc5.setBooking(b1);
+        bc5.setTypeReason(typeReasonRepository.findByTypeReasonID(1L));
 
 		try {
             entityManager.persist(bc5);
@@ -205,5 +209,5 @@ public class BookingCancleTest{
             System.out.println();
             System.out.println();
     }
-} 
+}  
 }

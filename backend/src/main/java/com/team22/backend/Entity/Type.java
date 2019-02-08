@@ -1,7 +1,9 @@
 package com.team22.backend.Entity;
+
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity  //บอกว่าเป็น class entity class ที่เก็บขอมูล
 @Data  // lombox จะสร้าง method getter setter ให้เอง
@@ -14,8 +16,10 @@ public class Type {
     @SequenceGenerator(name="type_seq",sequenceName="type_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="type_seq")
     @Column(name="Types_ID",unique = true, nullable = false)
-    private @NonNull Long typeIds;
-    private @NonNull String typeName;
+    @NotNull
+    private Long typeIds;
+    @NotNull
+    private String typeName;
     public Type (String ty){
         this. typeName = ty;
     }

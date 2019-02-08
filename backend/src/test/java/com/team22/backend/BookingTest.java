@@ -48,6 +48,7 @@ public class BookingTest{
         b1.setCategory(null);
         b1.setStatus(null);
         b1.setStatusBooking(null);
+        b1.setStyle(null);
         try {
             entityManager.persist(b1);
             entityManager.flush();

@@ -42,6 +42,7 @@ public class BookingCancle {
     @JoinColumn(name = "bookingId", insertable = true)
     private Booking Booking;
 
+    @NotNull(message="typeReasonID must not be null to be valid")
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = TypeReason.class)
     @JoinColumn(name = "typeReasonID", insertable = true)
     private TypeReason typeReason;
