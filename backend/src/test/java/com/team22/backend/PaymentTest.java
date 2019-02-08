@@ -63,7 +63,7 @@ public class PaymentTest {
         Date paydate = new Date();
         Customer c1 = customerRepository.findByCusId(1L);
         Selling s1 = sellingRepository.findBySellingId(1L);
-        Booking b1 = bookingRepository.findBybookingId(1L);
+        Booking b1 = bookingRepository.findByBookingId(1L);
         Lease l1 = leaseRepository.findByLeaseId(1L);
         paymentdb1.setBillPayment("BillPayment2");
         paymentdb1.setTypePay("Renting");
@@ -94,7 +94,7 @@ public class PaymentTest {
         Date paydate = new Date();
         Customer c2 = customerRepository.findByCusId(2L);
         Selling s1 = sellingRepository.findBySellingId(1L);
-        Booking b1 = bookingRepository.findBybookingId(1L);
+        Booking b1 = bookingRepository.findByBookingId(1L);
         Lease l1 = leaseRepository.findByLeaseId(1L);
         paymentdb2.setBillPayment("BillPayment3");
         paymentdb2.setTypePay("Sellingggggg");
@@ -153,7 +153,7 @@ public class PaymentTest {
         Date paydate = new Date();
         Customer c3 = customerRepository.findByCusId(3L);
         Selling s1 = sellingRepository.findBySellingId(1L);
-        Booking b1 = bookingRepository.findBybookingId(1L);
+        Booking b1 = bookingRepository.findByBookingId(1L);
         Lease l1 = leaseRepository.findByLeaseId(1L);
         paymentdb4.setBillPayment("BillPayment4");
         paymentdb4.setTypePay("Aooking");
@@ -184,7 +184,7 @@ public class PaymentTest {
         Date paydate = new Date();
         Customer c5 = customerRepository.findByCusId(5L);
         Selling s1 = sellingRepository.findBySellingId(1L);
-        Booking b1 = bookingRepository.findBybookingId(1L);
+        Booking b1 = bookingRepository.findByBookingId(1L);
         Lease l1 = leaseRepository.findByLeaseId(1L);
         paymentdb5.setBillPayment("BillPayment5");
         paymentdb5.setTypePay("Booking");

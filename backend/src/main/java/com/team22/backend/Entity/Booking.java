@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import javax.validation.constraints.*;
 
 @Data
 @Entity
@@ -17,9 +18,23 @@ public class Booking {
     @SequenceGenerator(name="booking_seq",sequenceName="booking_seq")
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="booking_seq")
     @Column(name="BookingID",unique = true, nullable = false)
-    private @NonNull Long bookingId;
+   
+    @NotNull(message="bookingId must not be null to be valid")
+    private Long bookingId;
+
+    @NotNull(message="bookingDate must not be null to be valid")
     private  LocalDate bookingDate;
+
+    @NotNull(message="status must not be null to be valid")
     private String status;
+
+    @NotNull(message="statusBooking must not be null to be valid")
+    private String statusBooking;
+
+    @NotNull(message="category must not be null to be valid")
+    @Pattern(regexp ="(งาน).+")
+    @Size(min=5 ,max=30)
+    private String category;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Staff.class)
     @JoinColumn(name = "stID", insertable = true)
@@ -35,4 +50,3 @@ public class Booking {
 
 
 }
-

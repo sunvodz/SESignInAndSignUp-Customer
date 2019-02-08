@@ -37,7 +37,9 @@ public class Data {
             BookingRepository bookingRepository, CustomerRepository customerRepository, TypeRepository typeRepository,
             StyleRepository styleRepository, LeaseRepository leaseRepository, PayMentRepository payMentRepository,
             ExperienceRepository experienceRepository, ProvinceRepository provinceRepository,
-            CareerRepository careerRepository) {
+            CareerRepository careerRepository,BookingCancleRepository bookingCancleRepository,
+            TypeReasonRepository typeReasonRepository
+            ) {
         return args -> {
 
             Stream.of("Renting", "Selling", "Stocking").forEach(status -> {
@@ -442,12 +444,13 @@ public class Data {
             String bDate1 = "20:04:1998";
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
             LocalDate bdate = LocalDate.parse(bDate1, formatter);
-            bookingRepository.save(bookingdb);
-
+            bookingdb.setBookingId(1L);
             bookingdb.setBookingDate(bdate);
-            bookingdb.setCustomer(c3);
             bookingdb.setStatus("not paid");
+            bookingdb.setStatusBooking("Booking");
+            bookingdb.setCategory("งานวันเกิด");
             bookingdb.setStaff(st1);
+            bookingdb.setCustomer(c3);
             bookingdb.setStyle(sy1);
             bookingRepository.save(bookingdb);
 
@@ -507,6 +510,7 @@ public class Data {
             sellingRepository.save(sellingdb);
 
             Lease lid = leaseRepository.findByLeaseId(1L);
+            Booking b1 = bookingRepository.findByBookingId(1L);
 
             PayMent paymentdb = new PayMent();
             Date paydate = new Date();
@@ -519,6 +523,23 @@ public class Data {
             paymentdb.setLease(lid);
             payMentRepository.save(paymentdb);
 
+            Stream.of("การบริการ", "ราคา", "ธุระส่วนตัวของลูกค้า").forEach(typeReasonName -> {
+                TypeReason typeReasondb = new TypeReason(typeReasonName);
+                typeReasonRepository.save(typeReasondb);
+            });
+            TypeReason tr1 = typeReasonRepository.findByTypeReasonID(1L);
+            BookingCancle bookingCancledb = new BookingCancle();
+            Date bookingCancleDate = new Date();
+            bookingCancledb.setBookingCancleID(1L);
+            bookingCancledb.setBookingCancleIDs("Bc1");
+            bookingCancledb.setBookingCancleDate(bookingCancleDate);
+            bookingCancledb.setBookingCancleStatus("cancled");
+            bookingCancledb.setBookingCancleReason("เพราะไม่ว่าง");
+            bookingCancledb.setBooking(b1);
+            bookingCancledb.setTypeReason(tr1);
+            bookingCancleRepository.save(bookingCancledb);
+
+            
             System.out.println("\n Spring-Boot Complete");
         };
     }

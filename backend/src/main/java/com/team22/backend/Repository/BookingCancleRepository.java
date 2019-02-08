@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 @RepositoryRestResource
 @CrossOrigin(origins = "http://localhost:4200")
-public interface BookingRepository extends JpaRepository<Booking, Long> {
-        Booking findByBookingId(Long id);
-        Booking findByStatusBooking(String bookingStatus);
+public interface BookingCancleRepository extends JpaRepository<BookingCancle, Long> {
+        Booking findBybookingCancleID(Long id);
 }
