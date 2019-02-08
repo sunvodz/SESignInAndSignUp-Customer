@@ -46,10 +46,12 @@ public class Customer {
     @Size(min = 2, max = 100)
     private String customerAddress;
 
+    @NotNull(message = "Province Null")
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Province.class)
     @JoinColumn(name = "Province_ID", insertable = true)
     private Province province;
 
+    @NotNull(message = "Career Null")
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Career.class)
     @JoinColumn(name = "Career_ID", insertable = true)
     private Career career;

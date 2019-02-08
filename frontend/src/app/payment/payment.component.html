@@ -325,8 +325,14 @@
             <mat-header-cell *matHeaderCellDef>No.</mat-header-cell>
             <mat-cell *matCellDef="let element"> {{ element.pmId }} </mat-cell>
           </ng-container>
+          <ng-container matColumnDef="billPay">
+            <mat-header-cell *matHeaderCellDef >BillId</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.billPayment }}
+            </mat-cell>
+          </ng-container>
           <ng-container matColumnDef="datePay">
-            <mat-header-cell *matHeaderCellDef s> DatePay </mat-header-cell>
+            <mat-header-cell *matHeaderCellDef >  DatePay </mat-header-cell>
             <mat-cell *matCellDef="let element">
               {{ element.datePay }}
             </mat-cell>

@@ -18,9 +18,9 @@ public class PayMent {
     @NotNull(message="PayMent_ID Null")    
     private Long pmId;
 
-    @NotNull(message="PaymantIds Null")    
     @Column(unique = true)
-    private String paymantIds;
+    @NotNull(message="BillPayment Null")    
+    private String billPayment;
 
     @NotNull(message="DatePay Null")    
     private Date datePay;
@@ -35,7 +35,7 @@ public class PayMent {
 
     @NotNull(message="Class Customer Null")
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "customerId")
+    @JoinColumn(name = "cusId")
     private Customer customer;
 
     @OneToOne(fetch = FetchType.EAGER)

@@ -105,12 +105,24 @@ public class PayMentController {
     public Collection<Customer> customer() {
         return customerRepository.findAll().stream().collect(Collectors.toList());
     }
-
+    @PostMapping("/customerCheckPayment/{customerIDs}")
+    public Customer customerCheckPayment(@PathVariable String customerIDs) {
+        return this.customerRepository.findByCustomerIDs(customerIDs);
+    }
     @PostMapping("/payment/{typepay}/{statuspay}/{customer}/{selling}/{style}/{lease}")
     public PayMent newPayMent(@PathVariable String typepay, @PathVariable String statuspay,
             @PathVariable String customer, @PathVariable Long selling, @PathVariable Long style,
             @PathVariable Long lease) {
         PayMent newPayMent = new PayMent();
+
+        Long i;
+        for( i=1L; i<9999L;i++) {
+            if(paymentRepository.findByPmId(i) == null) {
+                newPayMent.setBillPayment("BillPayment"+i);
+                break;
+            }
+        }
+       
         newPayMent.setStatusPay(statuspay);
         newPayMent.setTypePay(typepay);
 
@@ -131,6 +143,8 @@ public class PayMentController {
 
         return paymentRepository.save(newPayMent);
     }
+
+   
 
     @PutMapping("/booking/{id}/{status}")
     Booking replaceBooking(Booking newBooking, @PathVariable String status, @PathVariable Long id) {

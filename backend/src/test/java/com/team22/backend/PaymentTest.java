@@ -53,7 +53,7 @@ public class PaymentTest {
         PayMent paymentdb1 = new PayMent();
         Date paydate = new Date();
         Customer c1 = customerRepository.findByCusId(1L);
-        paymentdb1.setPaymantIds("Payment2");
+        paymentdb1.setBillPayment("BillPayment2");
         paymentdb1.setTypePay("Renting");
         paymentdb1.setStatusPay("paid");
         paymentdb1.setDatePay(paydate);
@@ -77,7 +77,7 @@ public class PaymentTest {
         PayMent paymentdb2 = new PayMent();
         Date paydate = new Date();
         Customer c2 = customerRepository.findByCusId(2L);
-        paymentdb2.setPaymantIds("Payment3");
+        paymentdb2.setBillPayment("BillPayment3");
         paymentdb2.setTypePay("Sellingggggg");
         paymentdb2.setStatusPay("paid");
         paymentdb2.setDatePay(paydate);
@@ -99,24 +99,13 @@ public class PaymentTest {
     }
     @Test
 	public void testPaymentNotNull() {
-        
-        
-        Customer customer = new Customer();
-        customer.setCusId(null);
-        customer.setCustomerIDs(null);
-		customer.setCustomerName(null);
-		customer.setCustomerPassword(null);
-        customer.setCustomerPhone(null); 
-        customer.setCustomerBirthday(null); 
-        customer.setCustomerAddress(null); 
-        customer.setCustomerGender(null); 
-        customerRepository.save(customer);
         PayMent paymentdb3 = new PayMent();
-        paymentdb3.setPaymantIds(null);
+        paymentdb3.setPmId(null);
+        paymentdb3.setBillPayment(null);
         paymentdb3.setTypePay(null);
         paymentdb3.setStatusPay(null);
         paymentdb3.setDatePay(null);
-        paymentdb3.setCustomer(customer);
+        paymentdb3.setCustomer(null);
         try {
             entityManager.persist(paymentdb3);
             entityManager.flush();
@@ -130,7 +119,7 @@ public class PaymentTest {
             System.out.println(); 
             System.out.println(); 
             assertEquals(violations.isEmpty(), false);
-            assertEquals(violations.size(), 7);
+            assertEquals(violations.size(), 5);
         }
     }
     @Test
@@ -138,7 +127,7 @@ public class PaymentTest {
         PayMent paymentdb4 = new PayMent();
         Date paydate = new Date();
         Customer c3 = customerRepository.findByCusId(3L);
-        paymentdb4.setPaymantIds("Payment4");
+        paymentdb4.setBillPayment("BillPayment4");
         paymentdb4.setTypePay("Aooking");
         paymentdb4.setStatusPay("paid");
         paymentdb4.setDatePay(paydate);
@@ -158,38 +147,37 @@ public class PaymentTest {
             assertEquals(violations.size(), 1);
         }
     }
-     @Test
-    //(expected=javax.persistence.PersistenceException.class)
-    public void TestUniqePaymentIdsError() {
-        PayMent paymentdb7 = new PayMent();
+    @Test
+    public void TestUniqeBillPaymentError() {
+        PayMent paymentdb5 = new PayMent();
         Date paydate = new Date();
-        Customer c1 = customerRepository.findByCusId(1L);
-        paymentdb7.setPaymantIds("Payment5");
-        paymentdb7.setTypePay("Renting");
-        paymentdb7.setStatusPay("paid");
-        paymentdb7.setDatePay(paydate);
-        paymentdb7.setCustomer(c1);
-        entityManager.persist(paymentdb7);
-		entityManager.flush();
-		
-        PayMent paymentdb8 = new PayMent();
-        Date paydate2 = new Date();
-        Customer c2 = customerRepository.findByCusId(2L);
-        paymentdb8.setPaymantIds("Payment5");
-        paymentdb8.setTypePay("Selling");
-        paymentdb8.setStatusPay("paid");
-        paymentdb8.setDatePay(paydate2);
-        paymentdb8.setCustomer(c2);
-        try{
-            entityManager.persist(paymentdb8);
-            entityManager.flush();
-        }catch(javax.persistence.PersistenceException e) {
-            System.out.println(); 
-            System.out.println();   
-            System.out.println("\n\n\n\n\n\n\n\n\n" + e + "----------------->> 5.UniqePaymentIds \n\n\n\n\n\n\n\n\n\n\n");
-            System.out.println(); 
-            System.out.println(); 
-        }
-    } 
+        Customer c5 = customerRepository.findByCusId(5L);
+        paymentdb5.setBillPayment("BillPayment5");
+        paymentdb5.setTypePay("Booking");
+        paymentdb5.setStatusPay("paid");
+        paymentdb5.setDatePay(paydate);
+        paymentdb5.setCustomer(c5);
+        entityManager.persist(paymentdb5);
+        entityManager.flush();
 
+        PayMent paymentdb6 = new PayMent();
+        Date paydate2 = new Date();
+        Customer c4 = customerRepository.findByCusId(4L);
+        paymentdb6.setBillPayment("BillPayment5");
+        paymentdb6.setTypePay("Selling");
+        paymentdb6.setStatusPay("paid");
+        paymentdb6.setDatePay(paydate2);
+        paymentdb6.setCustomer(c4);
+        try {
+            entityManager.persist(paymentdb6);
+            entityManager.flush();
+        } catch (javax.persistence.PersistenceException e) {
+            System.out.println();
+            System.out.println();
+            System.out
+                    .println("\n\n\n\n\n\n\n\n\n" + e + "----------------->> 5.UniqeBillPayment \n\n\n\n\n\n\n\n\n\n\n");
+            System.out.println();
+            System.out.println();
+        }
+    }
 }
