@@ -18,8 +18,9 @@ public class Career {
     @SequenceGenerator(name = "career_seq", sequenceName = "career_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "career_seq")
     @Column(name = "Career_ID", unique = true, nullable = false)
-
-    private @NotNull Long careerId;
+    @NotNull
+    private Long careerId;
+    @NotNull
     private String careerName;
 
 }

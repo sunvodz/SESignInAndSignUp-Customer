@@ -20,7 +20,9 @@ public class Province {
     @SequenceGenerator(name = "province_seq", sequenceName = "province_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "province_seq")
     @Column(name = "PROVINCE_ID", unique = true, nullable = false)
+    @NotNull
     private Long provinceId;
+    @NotNull
     private String provinceName;
 
 }
