@@ -1,7 +1,8 @@
 package com.team22.backend.Entity;
-import lombok.*;
 
+import lombok.*;
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 
@@ -13,14 +14,29 @@ import java.time.LocalDate;
 @EqualsAndHashCode
 @Table(name="Lease") //ชื่อตาราง
 public class Lease {
+
     @Id
-    @SequenceGenerator(name="lease_seq",sequenceName="lease_seq")
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="lease_seq")
-    @Column(name="Lease_ID",unique = true, nullable = false)
-    private @NonNull Long leaseId;
-    private  LocalDate dateStart;
-    private  LocalDate   dateEnd;
-    private   @NonNull String status;
+    @SequenceGenerator(name = "lease_seq", sequenceName = "lease_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "lease_seq")
+    @Column(name = "Lease_ID", unique = true, nullable = false)
+
+    private Long leaseId;
+    @NotNull
+    private LocalDate dateStart;
+    @NotNull
+    private LocalDate dateEnd;
+
+    @NotNull
+    private  String status;
+
+    @NotNull
+    private  String leaseStatus;
+
+    @NotNull
+    @Pattern(regexp = "[ชุด].+")
+    @Size(min=5,max=50)
+    @Column(unique=true)
+    private    String commentRenting;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Customer.class)
     @JoinColumn(name = "customerId", insertable = true)
@@ -35,4 +51,3 @@ public class Lease {
     private Product product;
 
 }
-

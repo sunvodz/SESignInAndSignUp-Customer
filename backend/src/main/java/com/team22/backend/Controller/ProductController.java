@@ -5,9 +5,10 @@ import com.team22.backend.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 import java.util.Collection;
-import java.util.Date;
 import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -45,10 +46,20 @@ public class ProductController {
     public Collection<Description> description() {
         return descriptionRepository.findAll().stream().collect(Collectors.toList());
     }
-    @PostMapping("/product/add/{productID}/{productName}/{productPrice}/{productQuantity}/{productDate}/{state}/{type}")
-    public Product newProduct(@RequestBody Product newProduct, @PathVariable String productID, @PathVariable String productName
-            , @PathVariable Integer productPrice, @PathVariable Integer productQuantity, @PathVariable Date productDate, @PathVariable Long state, @PathVariable Long type
+    @PostMapping("/checkproductids/{productID}")
+    public Product CheckProductId(@PathVariable String productID)
+    {
+        return  this.productRepository.findByProductIds(productID);
+    }
+    @PostMapping("/product/add/{productID}/{productName}/{productPrice}/{productQuantity}/{prodDate}/{state}/{type}")
+    public Product addnewProduct(@PathVariable String productID, @PathVariable String productName
+            , @PathVariable Integer productPrice, @PathVariable Integer productQuantity, @PathVariable String prodDate, @PathVariable Long state, @PathVariable Long type
     ) {
+        Product newProduct = new Product();
+        String pDate = prodDate;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+        LocalDate productDate = LocalDate.parse(pDate,formatter);
+       
         Status setStatus = statusRepository.findByStateId(state);
         Type setType = typeRepository.findByTypeIds(type);
         newProduct.setProductIds(productID);
@@ -56,7 +67,6 @@ public class ProductController {
         newProduct.setProductQuantity(productQuantity);
         newProduct.setProductPrice(productPrice);
         newProduct.setProductDate(productDate);
-  //      newProduct.setProductImg(productImg);/{productImg},@PathVariable String productImg
         newProduct.setStatus(setStatus);
         newProduct.setType(setType);
         return productRepository.save(newProduct);
@@ -71,14 +81,18 @@ public class ProductController {
         newDes.setProduct(setProd);
         return descriptionRepository.save(newDes);
     }
-    @PutMapping("/product/updateproduct/{prodId}/{productID}/{productName}/{productPrice}/{productQuantity}")
-    public Product editProduct(@RequestBody Product prod, @PathVariable Long prodId, @PathVariable String productID, @PathVariable String productName, @PathVariable Integer productPrice
+    @PutMapping("/product/updateproduct/{prodId}/{productID}/{productName}/{productPrice}/{productQuantity}/{state}/{type}")
+    public Product editProduct(@RequestBody Product prod, @PathVariable Long prodId, @PathVariable String productID, @PathVariable String productName, @PathVariable Integer productPrice, @PathVariable Long state, @PathVariable Long type
             , @PathVariable Integer productQuantity) {
         return productRepository.findById(prodId).map(prodEdit -> {
+            Status setStatus = statusRepository.findByStateId(state);
+            Type setType = typeRepository.findByTypeIds(type);
                     prodEdit.setProductIds(productID);
                     prodEdit.setProductName(productName);
                     prodEdit.setProductPrice(productPrice);
                     prodEdit.setProductQuantity(productQuantity);
+                    prodEdit.setStatus(setStatus);
+                    prodEdit.setType(setType);
                     return productRepository.save(prodEdit);
                 }
         ).orElseGet(() -> {
@@ -100,5 +114,9 @@ public class ProductController {
     @DeleteMapping("/product/delete/{prodId}")
     public void deleteProduct(@PathVariable Long prodId) {
          productRepository.deleteById(prodId);
+    }
+    @DeleteMapping("/description/delete/{descriptionIds}")
+    public void deletedescription(@PathVariable Long descriptionIds) {
+        descriptionRepository.deleteById(descriptionIds);
     }
 }

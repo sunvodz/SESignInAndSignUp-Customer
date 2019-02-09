@@ -1,5 +1,4 @@
 package com.team22.backend;
-
 import com.team22.backend.Repository.*;
 import com.team22.backend.Entity.*;
 import org.springframework.boot.ApplicationRunner;
@@ -7,7 +6,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.filter.CharacterEncodingFilter;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -31,24 +29,41 @@ public class Data {
     }
 
     @Bean
-    ApplicationRunner init(PositionRepository positionRepository, StaffRepository staffRepository,
-            SellingRepository sellingRepository, EducationRepository educationRepository,
-            DetailRepository detailRepository, ProductRepository productRepository, StatusRepository statusRepository,
-            BookingRepository bookingRepository, CustomerRepository customerRepository, TypeRepository typeRepository,
-            StyleRepository styleRepository, LeaseRepository leaseRepository, PayMentRepository payMentRepository,
-            ExperienceRepository experienceRepository, ProvinceRepository provinceRepository,
-            CareerRepository careerRepository,BookingCancleRepository bookingCancleRepository,
-            TypeReasonRepository typeReasonRepository
-            ) {
+        ApplicationRunner init(PositionRepository positionRepository,
+                               StaffRepository staffRepository,
+                               SellingRepository sellingRepository,
+                               EducationRepository educationRepository,
+                               DetailRepository detailRepository,
+                               ProductRepository productRepository,
+                               StatusRepository statusRepository,
+                               BookingRepository bookingRepository,
+                               CustomerRepository customerRepository,
+                               TypeRepository typeRepository,
+                               StyleRepository styleRepository,
+                               LeaseRepository leaseRepository,
+                               PayMentRepository  payMentRepository,
+                               ExperienceRepository experienceRepository,
+                               ProvinceRepository provinceRepository,
+                               CareerRepository careerRepository,
+                               CheckProductRepository checkProductRepository,
+                               CheckingRepository checkingRepository,
+                               SalaryRepository salaryRepository,
+                               PayerRepository payerRepository,
+                               ReviewRepository reviewRepository,
+                               LevelReviewRepository levelReviewRepository,
+                               TypeReasonRepository typeReasonRepository,
+                               BookingCancleRepository bookingCancleRepository,
+                               RestoreRepository restoreRepository,
+                               RestoreTypeRepository restoreTypeRepository
+
+
+                               ) {
         return args -> {
 
             Stream.of("Renting", "Selling", "Stocking").forEach(status -> {
                 Status state = new Status(status);
                 statusRepository.save(state);
             });
-            Status sta1 = statusRepository.findByStateId(1L);
-            Status sta2 = statusRepository.findByStateId(2L);
-            Status sta3 = statusRepository.findByStateId(3L);
             Stream.of("Cloth", "Shoes", "Cosmetic", "Hair", "Accessories", "OtherType").forEach(tName -> {
                 Type typeprodName = new Type(tName);
                 typeRepository.save(typeprodName);
@@ -57,39 +72,69 @@ public class Data {
                 Detail dprodName = new Detail(dName);
                 detailRepository.save(dprodName);
             });
+            Stream.of("Use","Repair","Donate","Reject","Recycle").forEach(checking -> {
+                Checking checkingprod = new Checking (checking);
+                checkingRepository.save(checkingprod);
+            });
+        Status sta1 = statusRepository.findByStateId(1L);
+        Status sta2 = statusRepository.findByStateId(2L);
+        Status sta3 = statusRepository.findByStateId(3L);
+        Type type1 = typeRepository.findByTypeIds(1L);
+        Product pt1 = productRepository.findByProdId(1L);
+        Product pt2 = productRepository.findByProdId(2L);
+        String pDate = ("01:02:2019");
+        DateTimeFormatter formatt = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+        LocalDate productDate = LocalDate.parse(pDate,formatt);
 
-            Stream.of("M.3", "M.6", "Polytechnical College", "Technical College", "Bachelor Degrees", "Master Degrees")
-                    .forEach(EduName -> {
-                        Education educationdb = new Education();
-                        educationdb.setEducationName(EduName);
-                        educationRepository.save(educationdb);
+            Product product = new Product();
+            product.setProductName("dress");
+            product.setProductIds("P45");
+            product.setProductPrice(1000);
+            product.setProductQuantity(18);
+            product.setProductDate(productDate);
+            product.setStatus(sta1);
+            product.setType(type1);
+            productRepository.save(product);
 
-                        if (EduName == "M.3") {
-                            educationdb.setEducationIds("E" + educationdb.getEducationId());
-                            educationdb.setEducationName(EduName);
-                            educationRepository.save(educationdb);
-                        } else if (EduName == "M.6") {
-                            educationdb.setEducationIds("E" + educationdb.getEducationId());
-                            educationdb.setEducationName(EduName);
-                            educationRepository.save(educationdb);
-                        } else if (EduName == "Polytechnical College") {
-                            educationdb.setEducationIds("E" + educationdb.getEducationId());
-                            educationdb.setEducationName(EduName);
-                            educationRepository.save(educationdb);
-                        } else if (EduName == "Technical College") {
-                            educationdb.setEducationIds("E" + educationdb.getEducationId());
-                            educationdb.setEducationName(EduName);
-                            educationRepository.save(educationdb);
-                        } else if (EduName == "Bachelor Degrees") {
-                            educationdb.setEducationIds("E" + educationdb.getEducationId());
-                            educationdb.setEducationName(EduName);
-                            educationRepository.save(educationdb);
-                        } else if (EduName == "Master Degrees") {
-                            educationdb.setEducationIds("E" + educationdb.getEducationId());
-                            educationdb.setEducationName(EduName);
-                            educationRepository.save(educationdb);
-                        }
-                    });
+            Product product1 = new Product();
+            product1.setProductName("Earing");
+            product1.setProductIds("P49");
+            product1.setProductPrice(1000);
+            product1.setProductQuantity(18);
+            product1.setProductDate(productDate);
+            product1.setStatus(sta2);
+            product1.setType(type1);
+            productRepository.save(product1);
+
+            Education educationdb = new Education();
+            educationdb.setEducationIds("E1");
+            educationdb.setEducationName("M.3");
+            educationRepository.save(educationdb);
+
+            Education educationdb1 = new Education();
+            educationdb1.setEducationIds("E2");
+            educationdb1.setEducationName("M.6");
+            educationRepository.save(educationdb1);
+
+            Education educationdb2 = new Education();
+            educationdb2.setEducationIds("E3");
+            educationdb2.setEducationName("Polytechnical College");
+            educationRepository.save(educationdb2);
+
+            Education educationdb3 = new Education();
+            educationdb3.setEducationIds("E4");
+            educationdb3.setEducationName("Technical College");
+            educationRepository.save(educationdb3);
+
+            Education educationdb4 = new Education();
+            educationdb4.setEducationIds("E5");
+            educationdb4.setEducationName("Bachelor Degrees");
+            educationRepository.save(educationdb4);
+
+            Education educationdb5 = new Education();
+            educationdb5.setEducationIds("E6");
+            educationdb5.setEducationName("Master Degrees");
+            educationRepository.save(educationdb5);
 
             Education ed1 = educationRepository.findByEducationId(1L);
             Education ed2 = educationRepository.findByEducationId(2L);
@@ -98,39 +143,193 @@ public class Data {
             Education ed5 = educationRepository.findByEducationId(5L);
             Education ed6 = educationRepository.findByEducationId(6L);
 
-            Stream.of("0 Year", "1-3 Year", "4-6 Year", "7-9 Year", "10 to Up").forEach(ExName -> {
-                Experience experiencedb = new Experience();
-                experiencedb.setExperienceName(ExName);
-                experienceRepository.save(experiencedb);
+            Experience experiencedb = new Experience();
+            experiencedb.setExperienceIds("Ex1");
+            experiencedb.setExperienceName(" 0 Year");
+            experienceRepository.save(experiencedb);
 
-                if (ExName == "0 Year") {
-                    experiencedb.setExperienceIds("Ex" + experiencedb.getExperienceId());
-                    experiencedb.setExperienceName(ExName);
-                    experienceRepository.save(experiencedb);
-                } else if (ExName == "1-3 Year") {
-                    experiencedb.setExperienceIds("Ex" + experiencedb.getExperienceId());
-                    experiencedb.setExperienceName(ExName);
-                    experienceRepository.save(experiencedb);
-                }
-                if (ExName == "4-6 Year") {
-                    experiencedb.setExperienceIds("Ex" + experiencedb.getExperienceId());
-                    experiencedb.setExperienceName(ExName);
-                    experienceRepository.save(experiencedb);
-                } else if (ExName == "7-9 Year") {
-                    experiencedb.setExperienceIds("Ex" + experiencedb.getExperienceId());
-                    experiencedb.setExperienceName(ExName);
-                    experienceRepository.save(experiencedb);
-                } else if (ExName == "10 to Up") {
-                    experiencedb.setExperienceIds("Ex" + experiencedb.getExperienceId());
-                    experiencedb.setExperienceName(ExName);
-                    experienceRepository.save(experiencedb);
-                }
-            });
+            Experience experiencedb2 = new Experience();
+            experiencedb2.setExperienceIds("Ex2");
+            experiencedb2.setExperienceName("1-3 Year");
+            experienceRepository.save(experiencedb2);
+
+            Experience experiencedb3 = new Experience();
+            experiencedb3.setExperienceIds("Ex3");
+            experiencedb3.setExperienceName("4-6 Year");
+            experienceRepository.save(experiencedb3);
+
+            Experience experiencedb4 = new Experience();
+            experiencedb4.setExperienceIds("Ex4");
+            experiencedb4.setExperienceName("7-9 Year");
+            experienceRepository.save(experiencedb4);
+
+            Experience experiencedb5 = new Experience();
+            experiencedb5.setExperienceIds("Ex5");
+            experiencedb5.setExperienceName("10 to Up");
+            experienceRepository.save(experiencedb5);
+
             Experience ex1 = experienceRepository.findByExperienceId(1L);
             Experience ex2 = experienceRepository.findByExperienceId(2L);
             Experience ex3 = experienceRepository.findByExperienceId(3L);
             Experience ex4 = experienceRepository.findByExperienceId(4L);
             Experience ex5 = experienceRepository.findByExperienceId(5L);
+
+            Position positiondb = new Position();
+            positiondb.setPositionIds("P1");
+            positiondb.setPositionName("Stylist");
+            positionRepository.save(positiondb);
+
+            Position positiondb2 = new Position();
+            positiondb2.setPositionIds("P2");
+            positiondb2.setPositionName("Service");
+            positionRepository.save(positiondb2);
+
+            Position positiondb3 = new Position();
+            positiondb3.setPositionIds("P3");
+            positiondb3.setPositionName("HairStylist");
+            positionRepository.save(positiondb3);
+
+            Position positiondb4 = new Position();
+            positiondb4.setPositionIds("P4");
+            positiondb4.setPositionName("MakeupArtist");
+            positionRepository.save(positiondb4);
+
+            Position positiondb5 = new Position();
+            positiondb5.setPositionIds("P5");
+            positiondb5.setPositionName("Renter");
+            positionRepository.save(positiondb5);
+
+            Position positiondb6 = new Position();
+            positiondb6.setPositionIds("P6");
+            positiondb6.setPositionName("Seller");
+            positionRepository.save(positiondb6);
+
+            Position positiondb7 = new Position();
+            positiondb7.setPositionIds("P7");
+            positiondb7.setPositionName("Accountant");
+            positionRepository.save(positiondb7);
+
+            Position po1 = positionRepository.findByPositionId(1L);
+            Position po2 = positionRepository.findByPositionId(2L);
+            Position po3 = positionRepository.findByPositionId(3L);
+            Position po4 = positionRepository.findByPositionId(4L);
+            Position po5 = positionRepository.findByPositionId(5L);
+            Position po6 = positionRepository.findByPositionId(6L);
+            Position po7 = positionRepository.findByPositionId(7L);
+
+            Staff staffdb = new Staff();
+            staffdb.setStaffIds("St1");
+            staffdb.setStaffName("Owner");
+            staffdb.setStaffPassword("Chayanun123456789");
+            staffdb.setEducation(ed1);
+            staffdb.setExperience(ex1);
+            staffdb.setStaffGender("Man");
+            staffdb.setStaffJobtype("Full Time");
+            staffdb.setStaffPhone("086-141-9833");
+            staffdb.setStaffSalary(50000);
+            staffdb.setPosition(po6);
+            staffdb.setStaffStatus("UnPaid");
+            staffRepository.save(staffdb);
+
+            Staff staffdb1 = new Staff();
+            staffdb1.setStaffIds("St2");
+            staffdb1.setStaffName("Ploy");
+            staffdb1.setStaffPassword("Chayanun123456789");
+            staffdb1.setStaffGender("Woman");
+            staffdb1.setStaffJobtype("Part Time");
+            staffdb1.setEducation(ed2);
+            staffdb1.setExperience(ex2);
+            staffdb1.setStaffPhone("081-108-6599");
+            staffdb1.setStaffSalary(29000);
+            staffdb1.setPosition(po5);
+            staffdb1.setStaffStatus("UnPaid");
+            staffRepository.save(staffdb1);
+
+            Staff staffdb2 = new Staff();
+
+            staffdb2.setStaffIds("St3");
+            staffdb2.setStaffName("Sunvo");
+            staffdb2.setStaffPassword("Chayanun123456789");
+            staffdb2.setStaffGender("Man");
+            staffdb2.setStaffJobtype("Part Time");
+            staffdb2.setEducation(ed3);
+            staffdb2.setExperience(ex3);
+            staffdb2.setStaffPhone("081-105-6559");
+            staffdb2.setStaffSalary(20000);
+            staffdb2.setPosition(po4);
+            staffdb2.setStaffStatus("UnPaid");
+            staffRepository.save(staffdb2);
+
+            Staff staffdb3 = new Staff();
+            staffdb3.setStaffIds("St4");
+            staffdb3.setStaffName("Ao");
+            staffdb3.setStaffPassword("Chayanun123456789");
+            staffdb3.setStaffGender("Man");
+            staffdb3.setStaffJobtype("Part Time");
+            staffdb3.setEducation(ed4);
+            staffdb3.setExperience(ex4);
+            staffdb3.setStaffPhone("081-103-6559");
+            staffdb3.setStaffSalary(2500);
+            staffdb3.setPosition(po3);
+            staffdb3.setStaffStatus("UnPaid");
+            staffRepository.save(staffdb3);
+
+            Staff st1 = staffRepository.findByStaffId(1L);
+            Staff st2 = staffRepository.findByStaffId(2L);
+            Staff st3 = staffRepository.findByStaffId(3L);
+            Staff st4 = staffRepository.findByStaffId(4L);
+
+            Payer payerdb = new Payer();
+            payerdb.setPayerIds("PA1");
+            payerdb.setPayerName("Admin1");
+            payerRepository.save(payerdb);
+
+            Payer payerdb1 = new Payer();
+            payerdb1.setPayerIds("PA2");
+            payerdb1.setPayerName("Admin2");
+            payerRepository.save(payerdb1);
+
+            Payer pa1 = payerRepository.findByPayerId(1L);
+            Payer pa2 = payerRepository.findByPayerId(2L);
+
+            Date sadate = new Date();
+
+            Salary salarydb = new Salary();
+            salarydb.setSalaryIds("SA1");
+            salarydb.setStaff(st1);
+            salarydb.setPayer(pa1);
+            salarydb.setSalaryDate(sadate);
+            salarydb.getStaff().getStaffStatus();
+            salarydb.getStaff().getStaffSalary();
+            salaryRepository.save(salarydb);
+
+            Salary salarydb2 = new Salary();
+            salarydb2.setSalaryIds("SA2");
+            salarydb2.setStaff(st2);
+            salarydb2.setPayer(pa1);
+            salarydb2.setSalaryDate(sadate);
+            salarydb2.getStaff().getStaffStatus();
+            salarydb2.getStaff().getStaffSalary();
+            salaryRepository.save(salarydb2);
+
+            Salary salarydb3 = new Salary();
+            salarydb3.setSalaryIds("SA3");
+            salarydb3.setStaff(st3);
+            salarydb3.setPayer(pa2);
+            salarydb3.setSalaryDate(sadate);
+            salarydb3.getStaff().getStaffStatus();
+            salarydb3.getStaff().getStaffSalary();
+            salaryRepository.save(salarydb3);
+
+            Salary salarydb4 = new Salary();
+            salarydb4.setSalaryIds("SA4");
+            salarydb4.setStaff(st4);
+            salarydb4.setPayer(pa2);
+            salarydb4.setSalaryDate(sadate);
+            salarydb4.getStaff().getStaffStatus();
+            salarydb4.getStaff().getStaffSalary();
+            salaryRepository.save(salarydb4);
+
 
             String dateB1 = "20:04:1997";
             String dateB2 = "21:05:1996";
@@ -257,28 +456,6 @@ public class Data {
             Customer c5 = customerRepository.findByCusId(5L);
             Customer c6 = customerRepository.findByCusId(6L);
 
-            Type type1 = typeRepository.findByTypeIds(1L);
-            Stream.of("Dress").forEach(proName -> {
-                Product productName = new Product();
-                productName.setProductName(proName);
-                productRepository.save(productName);
-
-                if (proName == "Dress") {
-                    Product prodid = productRepository.findByProdId(1L);
-                    productName.setProductIds("P" + prodid.getProdId());
-                    productName.setProductPrice(1000);
-                    productName.setProductQuantity(18);
-                    productName.setStatus(sta1);
-                    productName.setType(type1);
-                    productRepository.save(productName);
-                }
-
-            });
-            Product pt1 = productRepository.findByProdId(1L);
-
-           
-                        
-                        
                             Style styledb1 = new Style();
                             styledb1.setStyleID(1L);
                             styledb1.setStyleIDs("Sy1");
@@ -328,125 +505,6 @@ public class Data {
             Style sy5 = styleRepository.findBystyleID(5L);
             Style sy6 = styleRepository.findBystyleID(6L);
 
-            Stream.of("Stylist", "Service", "HairStylist", "MakeupArtist", "Renter", "Seller", "Accountant")
-                    .forEach(posName -> {
-                        Position positiondb = new Position();
-                        positiondb.setPositionName(posName);
-                        positionRepository.save(positiondb);
-
-                        if (posName == "Stylist") {
-                            positiondb.setPositionIds("P" + positiondb.getPositionId());
-                            positiondb.setPositionName(posName);
-                            positionRepository.save(positiondb);
-                        }
-
-                    else if (posName == "Service") {
-                            positiondb.setPositionIds("P" + positiondb.getPositionId());
-                            positiondb.setPositionName(posName);
-                            positionRepository.save(positiondb);
-                        }
-
-                    else if (posName == "HairStylist") {
-                            positiondb.setPositionIds("P" + positiondb.getPositionId());
-                            positiondb.setPositionName(posName);
-                            positionRepository.save(positiondb);
-                        }
-
-                    else if (posName == "MakeupArtist") {
-                            positiondb.setPositionIds("P" + positiondb.getPositionId());
-                            positiondb.setPositionName(posName);
-                            positionRepository.save(positiondb);
-                        }
-
-                    else if (posName == "Renter") {
-                            positiondb.setPositionIds("P" + positiondb.getPositionId());
-                            positiondb.setPositionName(posName);
-                            positionRepository.save(positiondb);
-                        }
-
-                    else if (posName == "Seller") {
-                            positiondb.setPositionIds("P" + positiondb.getPositionId());
-                            positiondb.setPositionName(posName);
-                            positionRepository.save(positiondb);
-                        }
-
-                    else if (posName == "Accountant") {
-                            positiondb.setPositionIds("P" + positiondb.getPositionId());
-                            positiondb.setPositionName(posName);
-                            positionRepository.save(positiondb);
-                        }
-                    });
-
-            Position po1 = positionRepository.findByPositionId(1L);
-            Position po2 = positionRepository.findByPositionId(2L);
-            Position po3 = positionRepository.findByPositionId(3L);
-            Position po4 = positionRepository.findByPositionId(4L);
-            Position po5 = positionRepository.findByPositionId(5L);
-            Position po6 = positionRepository.findByPositionId(6L);
-            Position po7 = positionRepository.findByPositionId(7L);
-
-            Stream.of("Owner", "Ploy", "Sunvo", "Au").forEach(staffName -> {
-                Staff staffdb = new Staff();
-                staffdb.setStaffName(staffName);
-                staffRepository.save(staffdb);
-
-                if (staffName == "Owner") {
-                    staffdb.setStaffIds("St" + staffdb.getStaffId());
-                    staffdb.setStaffName(staffName);
-                    staffdb.setStaffPassword("123456");
-                    staffdb.setEducation(ed1);
-                    staffdb.setExperience(ex1);
-                    staffdb.setStaffGender("Man");
-                    staffdb.setStaffJobtype("Full Time");
-                    staffdb.setStaffPhone("086-141-9833");
-                    staffdb.setStaffSalary(50000);
-                    staffdb.setPosition(po6);
-                    staffdb.setStaffStatus("Un Paid");
-                    staffRepository.save(staffdb);
-                } else if (staffName == "Ploy") {
-                    staffdb.setStaffIds("St" + staffdb.getStaffId());
-                    staffdb.setStaffName(staffName);
-                    staffdb.setStaffPassword("123456");
-                    staffdb.setStaffGender("Woman");
-                    staffdb.setStaffJobtype("Part Time");
-                    staffdb.setEducation(ed2);
-                    staffdb.setExperience(ex2);
-                    staffdb.setStaffPhone("081-108-6599");
-                    staffdb.setStaffSalary(29000);
-                    staffdb.setPosition(po5);
-                    staffdb.setStaffStatus("Un Paid");
-                    staffRepository.save(staffdb);
-                } else if (staffName == "Sunvo") {
-                    staffdb.setStaffIds("St" + staffdb.getStaffId());
-                    staffdb.setStaffName(staffName);
-                    staffdb.setStaffPassword("123456");
-                    staffdb.setStaffGender("Man");
-                    staffdb.setStaffJobtype("Part Time");
-                    staffdb.setEducation(ed3);
-                    staffdb.setExperience(ex3);
-                    staffdb.setStaffPhone("081-105-6559");
-                    staffdb.setStaffSalary(20000);
-                    staffdb.setPosition(po4);
-                    staffdb.setStaffStatus("Un Paid");
-                    staffRepository.save(staffdb);
-                } else if (staffName == "Au") {
-                    staffdb.setStaffIds("St" + staffdb.getStaffId());
-                    staffdb.setStaffName(staffName);
-                    staffdb.setStaffPassword("123456");
-                    staffdb.setStaffGender("Man");
-                    staffdb.setStaffJobtype("Part Time");
-                    staffdb.setEducation(ed4);
-                    staffdb.setExperience(ex4);
-                    staffdb.setStaffPhone("081-103-6559");
-                    staffdb.setStaffSalary(2500);
-                    staffdb.setPosition(po3);
-                    staffdb.setStaffStatus("Un Paid");
-                    staffRepository.save(staffdb);
-                }
-            });
-            Staff st1 = staffRepository.findByStaffId(1L);
-            Staff st2 = staffRepository.findByStaffId(2L);
-
             Booking bookingdb = new Booking();
             String bDate1 = "20:04:1998";
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
@@ -460,77 +518,9 @@ public class Data {
             bookingdb.setCustomer(c3);
             bookingdb.setStyle(sy1);
             bookingRepository.save(bookingdb);
-
-            Lease leasedb = new Lease();
-            String lDate1 = "20:04:1998";
-            String lDate2 = "21:05:1998";
-            DateTimeFormatter lformatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
-            LocalDate ldate = LocalDate.parse(lDate1, lformatter);
-            LocalDate ldate1 = LocalDate.parse(lDate2, lformatter);
-            leasedb.setCustomer(c3);
-            leasedb.setDateStart(ldate);
-            leasedb.setDateEnd(ldate1);
-            leasedb.setStatus("paid");
-            leasedb.setStaff(st1);
-            leasedb.setProduct(pt1);
-            leaseRepository.save(leasedb);
-
-            Lease leasedb2 = new Lease();
-            String l2Date1 = "11:11:1998";
-            String l2Date2 = "12:12:1998";
-            DateTimeFormatter l2formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
-            LocalDate l2date = LocalDate.parse(l2Date1, l2formatter);
-            LocalDate l2date1 = LocalDate.parse(l2Date2, l2formatter);
-            leasedb2.setCustomer(c1);
-            leasedb2.setDateStart(l2date);
-            leasedb2.setDateEnd(l2date1);
-            leasedb2.setStatus("not paid");
-            leasedb2.setStaff(st1);
-            leasedb2.setProduct(pt1);
-            leaseRepository.save(leasedb2);
-
-            Lease leasedb3 = new Lease();
-            String l2Date12 = "07:07:1998";
-            String l2Date22 = "06:07:1998";
-            DateTimeFormatter l2formatter2 = DateTimeFormatter.ofPattern("dd:MM:yyyy");
-            LocalDate l2date2 = LocalDate.parse(l2Date12, l2formatter2);
-            LocalDate l2date12 = LocalDate.parse(l2Date22, l2formatter2);
-            leasedb3.setCustomer(c2);
-            leasedb3.setDateStart(l2date2);
-            leasedb3.setDateEnd(l2date12);
-            leasedb3.setStatus("not paid");
-            leasedb3.setStaff(st1);
-            leasedb3.setProduct(pt1);
-            leaseRepository.save(leasedb3);
-
-            Selling sellingdb = new Selling();
-            sellingRepository.save(sellingdb);
-            String sDate2 = "20:04:1998";
-            DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd:MM:yyyy");
-            LocalDate sdate = LocalDate.parse(sDate2, formatter2);
-
-            sellingdb.setSellingDate(sdate);
-            sellingdb.setCustomer(c2);
-            sellingdb.setStaff(st1);
-            sellingdb.setStatus("not paid");
-            sellingdb.setProduct(pt1);
-            sellingRepository.save(sellingdb);
-
-            Lease lid = leaseRepository.findByLeaseId(1L);
+            
             Booking b1 = bookingRepository.findByBookingId(1L);
 
-            PayMent paymentdb = new PayMent();
-            Date paydate = new Date();
-            paymentdb.setPmId(1L);
-            paymentdb.setBillPayment("BillPayment1");
-            paymentdb.setTypePay("Renting");
-            paymentdb.setStatusPay("paid");
-            paymentdb.setCustomer(c1);
-            paymentdb.setDatePay(paydate);
-            paymentdb.setLease(lid);
-            payMentRepository.save(paymentdb);
-
-    
             Stream.of("การบริการ", "ราคา", "ธุระส่วนตัวของลูกค้า").forEach(typeReasonName -> {
                 TypeReason typeReasondb = new TypeReason();
                 typeReasondb.setTypeReasonName(typeReasonName);
@@ -543,6 +533,41 @@ public class Data {
                 }else if(typeReasonName=="ธุระส่วนตัวของลูกค้า"){
                     typeReasondb.setTypeReasonID(3L);
                     typeReasonRepository.save(typeReasondb);
+            }
+            });
+
+            
+
+
+            Selling sellingdb = new Selling();
+            String sDate2 = "20:04:1998";
+            DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+            LocalDate sdate = LocalDate.parse(sDate2, formatter2);
+            sellingdb.setSellingId(1L);
+            sellingdb.setSellingDate(sdate);
+            sellingdb.setCustomer(c2);
+            sellingdb.setStaff(st1);
+            sellingdb.setStatus("not paid");
+            sellingdb.setProduct(pt1);
+            sellingdb.setCommentSelling("ร้านชุดสวย");
+            sellingRepository.save(sellingdb);
+
+            Selling sl1 = sellingRepository.findBySellingId(1L);
+
+
+
+                Stream.of("มาก", "ปานกลาง","น้อย").forEach(levelReview -> {
+                LevelReview level = new LevelReview();
+                level.setLevelName(levelReview);
+                if(levelReview=="มาก"){
+                    level.setLevelReviewId(1L);
+                    levelReviewRepository.save(level);
+                }else if(levelReview=="ปานกลาง"){
+                    level.setLevelReviewId(2L);
+                    levelReviewRepository.save(level);
+                }else if(levelReview=="น้อย"){
+                    level.setLevelReviewId(3L);
+                    levelReviewRepository.save(level);
             }
             });
             
@@ -559,6 +584,59 @@ public class Data {
             bookingCancledb.setTypeReason(tr1);
             bookingCancleRepository.save(bookingCancledb);
 
+
+            Stream.of("คืนสินค้าครบ", "คืนสินค้าไม่ครบ").forEach(restoreType -> {
+                RestoreType rtype = new RestoreType();
+                rtype.setTypeRestoreName(restoreType);
+                if(restoreType=="คืนสินค้าครบ"){
+                    rtype.setRestoreTypeId(1L);
+                    restoreTypeRepository.save(rtype);
+                }else if(restoreType=="คืนสินค้าไม่ครบ"){
+                    rtype.setRestoreTypeId(2L);
+                    restoreTypeRepository.save(rtype);
+                }
+            });
+        
+
+            Lease leasedb3 = new Lease();
+            String l2Date12 = "07:07:1998";
+            String l2Date22 = "06:07:1998";
+            DateTimeFormatter l2formatter2 = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+            LocalDate l2date2 = LocalDate.parse(l2Date12, l2formatter2);
+            LocalDate l2date12 = LocalDate.parse(l2Date22, l2formatter2);
+            leasedb3.setCustomer(c2);
+            leasedb3.setDateStart(l2date2);
+            leasedb3.setDateEnd(l2date12);
+            leasedb3.setStatus("paid");
+            leasedb3.setLeaseStatus("Rent");
+            leasedb3.setCommentRenting("ชุดสวย");
+            leasedb3.setStaff(st1);
+            leasedb3.setProduct(pt1);
+            leaseRepository.save(leasedb3);
+            Lease lid = leaseRepository.findByLeaseId(1L);
+
+            Restore restoredb = new Restore();
+            Date dateRestore = new Date();
+            restoredb.setDateRestore(dateRestore);
+            restoredb.setStatusRestore("restore");
+            restoredb.setCommentRestore("ชุดชำรุด");
+            restoredb.setLease(lid);
+            RestoreType RT1 = restoreTypeRepository.findByRestoreTypeId(1L);
+            restoredb.setRestoreType(RT1);
+            restoreRepository.save(restoredb);
+
+            PayMent paymentdb = new PayMent();
+            Date paydate = new Date();
+            paymentdb.setPmId(1L);
+            paymentdb.setBillPayment("BillPayment1");
+            paymentdb.setTypePay("Renting");
+            paymentdb.setStatusPay("paid");
+            paymentdb.setCustomer(c1);
+            paymentdb.setDatePay(paydate);
+            paymentdb.setLease(lid);
+            payMentRepository.save(paymentdb);
+
+          
             System.out.println("\n Spring-Boot Complete");
         };
     }

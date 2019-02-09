@@ -352,7 +352,7 @@ public class CustomerTest {
             System.out.println();
             System.out.println();
             System.out.println(
-                    "\n\n\n\n\n\n\n\n\n----------------->> 8.Test Career Insert DataSuccess \n\n\n\n\n\n\n\n\n\n\n");
+                    "\n\n\n\n\n\n\n\n\n----------------->> 10.Test Career Insert DataSuccess \n\n\n\n\n\n\n\n\n\n\n");
             System.out.println();
             System.out.println();
         } catch (javax.validation.ConstraintViolationException e) {
@@ -370,7 +370,7 @@ public class CustomerTest {
             System.out.println();
             System.out.println();
             System.out.println(
-                    "\n\n\n\n\n\n\n\n\n----------------->> 9.Test Province Insert DataSuccess \n\n\n\n\n\n\n\n\n\n\n");
+                    "\n\n\n\n\n\n\n\n\n----------------->> 11.Test Province Insert DataSuccess \n\n\n\n\n\n\n\n\n\n\n");
             System.out.println();
             System.out.println();
         } catch (javax.validation.ConstraintViolationException e) {

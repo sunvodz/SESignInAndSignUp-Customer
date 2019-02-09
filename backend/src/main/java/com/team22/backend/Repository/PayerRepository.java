@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 @RepositoryRestResource
 @CrossOrigin(origins = "http://localhost:4200")
-public interface LeaseRepository extends JpaRepository<Lease, Long>{
-	Lease findByLeaseId(Long leaseId);
-    Lease findByStatus(String status);
-    Lease findByCommentRenting(String commentRenting);
+public
+interface  PayerRepository extends JpaRepository<Payer, Long> {
+    Payer findByPayerId(Long id);
+    Payer findByPayerName(String name);
 }
