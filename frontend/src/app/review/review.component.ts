@@ -53,7 +53,9 @@ export class ReviewComponent implements OnInit {
     selectCustomerName: '',
     selectSellingId: '',
     reviewComment: '',
-    ment2: ''
+    ment2: '',
+    levelName: '',
+    reviewDate: ''
   };
 
   @ViewChild(MatSort)
@@ -85,27 +87,27 @@ export class ReviewComponent implements OnInit {
     });
   }
   save() {
-    const rex = new RegExp('[ควร].+');
+    const rex = new RegExp('[ควร].+[กขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรฤลฦวศษสหฬอฮฯะัาำิีึืฺุูเแโใไๅๆ็่้๊๋์]{4,20}');
     console.log(
       this.views.selectProductID,
       this.views.selectProductName,
       this.views.selectStatus,
       this.views.selectCustomerName,
-      this.levelName,
-      this.reviewDate,
+      this.views.levelName,
+      this.views.reviewDate,
       this.views.reviewComment,
       this.views.ment2
     );
 
     if (
-      this.views.selectProductID === null ||
-      this.views.selectProductName === null ||
-      this.views.selectStatus === null ||
-      this.views.selectCustomerName === null ||
-      this.levelName === null ||
-      this.reviewDate === null ||
-      this.views.reviewComment === null ||
-      this.views.ment2 === null
+      this.views.selectProductID === '' ||
+      this.views.selectProductName === '' ||
+      this.views.selectStatus === '' ||
+      this.views.selectCustomerName === '' ||
+      this.views.levelName === '' ||
+      this.views.reviewDate === '' ||
+      this.views.reviewComment === '' ||
+      this.views.ment2 === ''
     ) {
       alert('กรุณาเลือกและใส่ข้อมูลให้ครบ');
     } else {
@@ -129,9 +131,9 @@ export class ReviewComponent implements OnInit {
                       '/' +
                       this.views.selectCustomerName +
                       '/' +
-                      this.levelName +
+                      this.views.levelName +
                       '/' +
-                      this.pipe.transform(this.reviewDate, 'dd:MM:yyyy') +
+                      this.pipe.transform(this.views.reviewDate, 'dd:MM:yyyy') +
                       '/' +
                       this.views.reviewComment +
                       '/' +

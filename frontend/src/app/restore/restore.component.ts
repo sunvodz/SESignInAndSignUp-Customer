@@ -97,7 +97,7 @@ export class RestoreComponent implements OnInit {
   }
 
   save() {
-    const rex = new RegExp('[ชุด].+');
+    const rex = new RegExp('[ชุด].+[กขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรฤลฦวศษสหฬอฮฯะัาำิีึืฺุูเแโใไๅๆ็่้๊๋์]{4,20}');
     console.log(this.views.commentRestore);
 
     if (
@@ -177,7 +177,7 @@ export class RestoreComponent implements OnInit {
             });
         } else {
           this.snackBar.open(
-            'กรุณากรอกข้อมูล Comment ตัวขึ้นไปและขึ้นต้นด้วยคำว่าชุด และ มากกว่า3ตัวอักษร'
+            'กรุณากรอกข้อมูล Comment 5ตัวขึ้นไปและขึ้นต้นด้วยคำว่าชุด'
           );
         }
       }
