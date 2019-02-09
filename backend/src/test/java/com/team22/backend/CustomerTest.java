@@ -103,13 +103,13 @@ public class CustomerTest {
         try {
             entityManager.persist(customerdb2);
             entityManager.flush();
-            fail("CustomerPhone Size Not Equal 10 Error");
+            fail("CustomerPhone Size Not Equal 10 ");
         } catch (javax.validation.ConstraintViolationException e) {
             Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
             System.out.println();
             System.out.println();
             System.out.println("\n\n\n\n\n\n\n\n\n" + e
-                    + "----------------->> 2 .CustomerPhone Size Not Equal 10 Error \n\n\n\n\n\n\n\n\n\n\n");
+                    + "----------------->> 2.CustomerPhone Size Not Equal 10 Error \n\n\n\n\n\n\n\n\n\n\n");
             System.out.println();
             System.out.println();
             assertEquals(violations.isEmpty(), false);
@@ -137,7 +137,7 @@ public class CustomerTest {
         try {
             entityManager.persist(customerdb3);
             entityManager.flush();
-            fail("CustomerPhone Size Not Equal 10 Long Error");
+            fail("CustomerPhone Size Not Equal 10 Long ");
         } catch (javax.validation.ConstraintViolationException e) {
             Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
             System.out.println();
@@ -172,13 +172,13 @@ public class CustomerTest {
         try {
             entityManager.persist(customerdb4);
             entityManager.flush();
-            fail("CustomerAddress Size 100 Long Error");
+            fail("CustomerAddress Size 100 Long");
         } catch (javax.validation.ConstraintViolationException e) {
             Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
             System.out.println();
             System.out.println();
             System.out.println("\n\n\n\n\n\n\n\n\n" + e
-                    + "----------------->> 3.CustomerAddress Size Long 100 Error \n\n\n\n\n\n\n\n\n\n\n");
+                    + "----------------->> 4.CustomerAddress Size Long 100 Error \n\n\n\n\n\n\n\n\n\n\n");
             System.out.println();
             System.out.println();
             assertEquals(violations.isEmpty(), false);
@@ -201,13 +201,13 @@ public class CustomerTest {
         try {
             entityManager.persist(customerdb5);
             entityManager.flush();
-            fail("Test Customer Not Null Error");
+            fail("Test Customer Not Null");
         } catch (javax.validation.ConstraintViolationException e) {
             Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
             System.out.println();
             System.out.println();
             System.out.println("\n\n\n\n\n\n\n\n\n" + e
-                    + "----------------->> 4. Test Customer Not Null Error \n\n\n\n\n\n\n\n\n\n\n");
+                    + "----------------->> 5.Test Customer Not Null Error \n\n\n\n\n\n\n\n\n\n\n");
             System.out.println();
             System.out.println();
             assertEquals(violations.isEmpty(), false);
@@ -235,13 +235,13 @@ public class CustomerTest {
         try {
             entityManager.persist(customerdb6);
             entityManager.flush();
-            fail("Test CustomerPhone First Zero Error");
+            fail("Test CustomerPhone First Zero ");
         } catch (javax.validation.ConstraintViolationException e) {
             Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
             System.out.println();
             System.out.println();
             System.out.println("\n\n\n\n\n\n\n\n\n" + e
-                    + "----------------->> 5.Test CustomerPhone First Zero Error \n\n\n\n\n\n\n\n\n\n\n");
+                    + "----------------->> 6.Test CustomerPhone First Zero Error \n\n\n\n\n\n\n\n\n\n\n");
             System.out.println();
             System.out.println();
             assertEquals(violations.isEmpty(), false);
@@ -292,9 +292,89 @@ public class CustomerTest {
             System.out.println();
             System.out.println();
             System.out
-                    .println("\n\n\n\n\n\n\n\n\n" + e + "----------------->> 6.UniqeCustomerId \n\n\n\n\n\n\n\n\n\n\n");
+                    .println("\n\n\n\n\n\n\n\n\n" + e + "----------------->> 7.UniqeCustomerId \n\n\n\n\n\n\n\n\n\n\n");
             System.out.println();
             System.out.println();
+        }
+    }
+    @Test
+    public void testProvinceNotNull() {
+        Province provinces = new Province();
+        provinces.setProvinceId(null);
+        provinces.setProvinceName(null);
+        try {
+            entityManager.persist(provinces);
+            entityManager.flush();
+            fail("Test Province Not Null ");
+        } catch (javax.validation.ConstraintViolationException e) {
+            Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+            System.out.println();
+            System.out.println();
+            System.out.println("\n\n\n\n\n\n\n\n\n" + e
+                    + "----------------->>  8.Test Province Not Null Error \n\n\n\n\n\n\n\n\n\n\n");
+            System.out.println();
+            System.out.println();
+            assertEquals(violations.isEmpty(), false);
+            assertEquals(violations.size(), 1);
+        }
+    }
+
+    @Test
+    public void testCareerNotNull() {
+        Career career = new Career();
+        career.setCareerId(null);
+        career.setCareerName(null);
+       
+        try {
+            entityManager.persist(career);
+            entityManager.flush();
+            fail("Test Career Not Null");
+        } catch (javax.validation.ConstraintViolationException e) {
+            Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+            System.out.println();
+            System.out.println();
+            System.out.println("\n\n\n\n\n\n\n\n\n" + e
+                    + "----------------->>  9.Test Career Not Null Error \n\n\n\n\n\n\n\n\n\n\n");
+            System.out.println();
+            System.out.println();
+            assertEquals(violations.isEmpty(), false);
+            assertEquals(violations.size(), 1);
+        }
+    }
+
+    @Test
+    public void testCareerInsert() {
+        Career career = new Career();
+        career.setCareerName("อาชีพใหม่");
+        try {
+            entityManager.persist(career);
+            entityManager.flush();
+            System.out.println();
+            System.out.println();
+            System.out.println(
+                    "\n\n\n\n\n\n\n\n\n----------------->> 8.Test Career Insert DataSuccess \n\n\n\n\n\n\n\n\n\n\n");
+            System.out.println();
+            System.out.println();
+        } catch (javax.validation.ConstraintViolationException e) {
+            fail("Test Career Insert DataSuccess Error");
+        }
+    }
+
+    @Test
+    public void testProvinceInsert() {
+        Province provinces = new Province();
+        provinces.setProvinceName("จังหวัดใหม่");
+        try {
+            entityManager.persist(provinces);
+            entityManager.flush();
+            System.out.println();
+            System.out.println();
+            System.out.println(
+                    "\n\n\n\n\n\n\n\n\n----------------->> 9.Test Province Insert DataSuccess \n\n\n\n\n\n\n\n\n\n\n");
+            System.out.println();
+            System.out.println();
+        } catch (javax.validation.ConstraintViolationException e) {
+            fail("Test Province Insert DataSuccess Error");
         }
     }
 }

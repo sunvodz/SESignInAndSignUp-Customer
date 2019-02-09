@@ -107,7 +107,7 @@ public class PaymentTest {
         try {
             entityManager.persist(paymentdb2);
             entityManager.flush();
-            fail("TypePay Size Not Equal 7 Error");
+            fail("TypePay Size Not Equal 7 ");
         } catch(javax.validation.ConstraintViolationException e) {
             Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
             System.out.println(); 
@@ -134,7 +134,7 @@ public class PaymentTest {
         try {
             entityManager.persist(paymentdb3);
             entityManager.flush();
-            fail("Test Payment Not Null Error");
+            fail("Test Payment Not Null ");
             
         } catch(javax.validation.ConstraintViolationException e) {
             Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
@@ -166,7 +166,7 @@ public class PaymentTest {
         try {
             entityManager.persist(paymentdb4);
             entityManager.flush();
-            fail("Test Payment First RSB Error");
+            fail("Test Payment First RSB ");
         } catch(javax.validation.ConstraintViolationException e) {
             Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
             System.out.println(); 

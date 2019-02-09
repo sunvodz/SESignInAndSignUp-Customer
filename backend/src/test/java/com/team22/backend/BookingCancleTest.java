@@ -20,7 +20,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 @DataJpaTest
 public class BookingCancleTest{
 
-	@Autowired
+ 	@Autowired
     private BookingRepository bookingRepository;
 
     @Autowired
@@ -209,5 +209,5 @@ public class BookingCancleTest{
             System.out.println();
             System.out.println();
     }
-}  
-}
+}   
+} 
