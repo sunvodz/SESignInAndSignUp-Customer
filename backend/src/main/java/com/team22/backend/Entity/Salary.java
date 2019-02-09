@@ -29,7 +29,8 @@ public class Salary {
 
     @NotNull(message = "SalaryIds not null")
     private  String salaryIds;
-
+    
+    @NotNull
     private  Date salaryDate;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Staff.class)
