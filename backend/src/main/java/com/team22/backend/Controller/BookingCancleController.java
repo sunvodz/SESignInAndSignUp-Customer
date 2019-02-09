@@ -21,7 +21,7 @@ public class BookingCancleController {
 
     public BookingCancleController(BookingCancleRepository bookingCancleRepository, 
                                    BookingRepository bookingRepository,
-                                   CustomerRepository customerRepository) {
+                                   TypeReasonRepository typeReasonRepository) {
                                     this.bookingRepository = bookingRepository;
                                     this.bookingCancleRepository = bookingCancleRepository;
                                     this.typeReasonRepository = typeReasonRepository;
@@ -43,7 +43,13 @@ public class BookingCancleController {
             return typeReasonRepository.findAll().stream()
             .collect(Collectors.toList());
     }
-       
+
+    @GetMapping("/bookingCancle")
+        public Collection<BookingCancle> bookingCancles() {
+            return bookingCancleRepository.findAll().stream()
+            .collect(Collectors.toList());
+    }
+          
         
     @PostMapping("/bookingCancle/{bookingId}/{bookingCancleReason}/{typeReasonName}")
     public BookingCancle newBookingCancle(@PathVariable Long bookingId,

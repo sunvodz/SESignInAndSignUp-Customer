@@ -40,7 +40,7 @@ public class BookingCancle {
     @NotNull(message="bookingId must not be null to be valid")
     @OneToOne(fetch = FetchType.EAGER, targetEntity = Booking.class)
     @JoinColumn(name = "bookingId", insertable = true)
-    private Booking Booking;
+    private Booking booking;
 
     @NotNull(message="typeReasonID must not be null to be valid")
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = TypeReason.class)

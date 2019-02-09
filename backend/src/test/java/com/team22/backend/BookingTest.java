@@ -40,7 +40,7 @@ public class BookingTest{
         validator = factory.getValidator();
     }
 
-     @Test
+    @Test
     public void testBookingNull() {
         Booking b1 = new Booking();
         b1.setBookingId(null);
@@ -179,5 +179,5 @@ public class BookingTest{
 }
 
     // ----------------------------------------------------------------------------------------------
-     
-} 
+    
+}

@@ -50,10 +50,14 @@ import { MenucustomerComponent } from './menucustomer/menucustomer.component';
 import { MenuadminComponent } from './menuadmin/menuadmin.component';
 import { RegisterService } from './service/register.service';
 import { RegisterComponent } from './register/register.component';
-import { StockComponent} from './stock/stock.component';
-import {STOCKINGService} from './service/stocking.service';
+import { StockComponent } from './stock/stock.component';
+import { STOCKINGService } from './service/stocking.service';
 import { SignupComponent , Signincomplete , Signinuncomplete} from './signup/signup.component';
 import { SignupService } from './service/signup.service';
+import { RestoreComponent } from './restore/restore.component';
+import { RestoreService } from './service/restore.service';
+import { ReviewComponent } from './review/review.component';
+import { ReviewService } from './service/review.service';
 const appRoutes: Routes = [
 ];
 
@@ -71,10 +75,12 @@ const appRoutes: Routes = [
     MenuadminComponent,
     StockComponent,
     RegisterComponent,
+    RestoreComponent,
     SignupComponent,
     Signincomplete,
     Signinuncomplete,
-    Paymentcomplete
+    Paymentcomplete,
+    ReviewComponent
 
   ],
   imports: [
@@ -129,13 +135,14 @@ const appRoutes: Routes = [
       {path: 'signincomplete' , component: Signincomplete},
       {path: 'loginfalse' , component: Loginfalse},
       {path: 'paymentcomplete' , component: Paymentcomplete},
-
+      {path: 'restore' , component: RestoreComponent},
+      {path: 'review' , component: ReviewComponent},
       {path: '', component: HomeComponent}
     ])
   ],
   providers: [PaymentService , MakeupService , SellingService ,
     LeaseService , RegisterService , STOCKINGService , SignupService , Loginfalse ,
-    Signincomplete, Signinuncomplete , HomeComponent , Paymentcomplete ],
+    Signincomplete  , RestoreService , ReviewService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

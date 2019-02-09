@@ -79,11 +79,8 @@ public class Data {
         Status sta1 = statusRepository.findByStateId(1L);
         Status sta2 = statusRepository.findByStateId(2L);
         Status sta3 = statusRepository.findByStateId(3L);
-
         Type type1 = typeRepository.findByTypeIds(1L);
-
-        
-
+       
         String pDate = ("01:02:2019");
         DateTimeFormatter formatt = DateTimeFormatter.ofPattern("dd:MM:yyyy");
         LocalDate productDate = LocalDate.parse(pDate,formatt);
@@ -107,7 +104,6 @@ public class Data {
             product1.setStatus(sta2);
             product1.setType(type1);
             productRepository.save(product1);
-
             Product pt1 = productRepository.findByProdId(1L);
             Product pt2 = productRepository.findByProdId(2L);
 
@@ -225,7 +221,7 @@ public class Data {
             Staff staffdb = new Staff();
             staffdb.setStaffIds("St1");
             staffdb.setStaffName("Owner");
-            staffdb.setStaffPassword("Chayanun123456789");
+            staffdb.setStaffPassword("123456");
             staffdb.setEducation(ed1);
             staffdb.setExperience(ex1);
             staffdb.setStaffGender("Man");
@@ -239,7 +235,7 @@ public class Data {
             Staff staffdb1 = new Staff();
             staffdb1.setStaffIds("St2");
             staffdb1.setStaffName("Ploy");
-            staffdb1.setStaffPassword("Chayanun123456789");
+            staffdb1.setStaffPassword("123456");
             staffdb1.setStaffGender("Woman");
             staffdb1.setStaffJobtype("Part Time");
             staffdb1.setEducation(ed2);
@@ -254,7 +250,7 @@ public class Data {
 
             staffdb2.setStaffIds("St3");
             staffdb2.setStaffName("Sunvo");
-            staffdb2.setStaffPassword("Chayanun123456789");
+            staffdb2.setStaffPassword("123456");
             staffdb2.setStaffGender("Man");
             staffdb2.setStaffJobtype("Part Time");
             staffdb2.setEducation(ed3);
@@ -268,7 +264,7 @@ public class Data {
             Staff staffdb3 = new Staff();
             staffdb3.setStaffIds("St4");
             staffdb3.setStaffName("Ao");
-            staffdb3.setStaffPassword("Chayanun123456789");
+            staffdb3.setStaffPassword("123456");
             staffdb3.setStaffGender("Man");
             staffdb3.setStaffJobtype("Part Time");
             staffdb3.setEducation(ed4);
@@ -523,7 +519,7 @@ public class Data {
             bookingdb.setCustomer(c3);
             bookingdb.setStyle(sy1);
             bookingRepository.save(bookingdb);
-
+            
             Booking b1 = bookingRepository.findByBookingId(1L);
 
             Stream.of("การบริการ", "ราคา", "ธุระส่วนตัวของลูกค้า").forEach(typeReasonName -> {
@@ -602,6 +598,7 @@ public class Data {
                 }
             });
         
+
             Lease leasedb2 = new Lease();
             String l2Date1 = "07:07:1998";
             String l2Date2 = "06:07:1998";

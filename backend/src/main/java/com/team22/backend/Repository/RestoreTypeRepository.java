@@ -11,3 +11,4 @@ public interface RestoreTypeRepository extends JpaRepository<RestoreType, Long> 
         RestoreType findByRestoreTypeId(Long id);
         RestoreType findByTypeRestoreName(String typeRestoreName);
 }
+ 
