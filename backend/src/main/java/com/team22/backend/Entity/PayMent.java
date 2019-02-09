@@ -1,8 +1,11 @@
 package com.team22.backend.Entity;
+
 import javax.persistence.*;
 import lombok.*;
 import java.util.*;
 import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 @Data
 @Entity
 @Getter @Setter
@@ -22,6 +25,7 @@ public class PayMent {
     @NotNull(message="BillPayment Null")    
     private String billPayment;
 
+    @JsonFormat(pattern = "yyyy-MM-dd : HH-mm" ,timezone = "GMT+7")
     @NotNull(message="DatePay Null")    
     private Date datePay;
 
