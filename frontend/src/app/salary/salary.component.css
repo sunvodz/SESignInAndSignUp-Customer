@@ -1,5 +1,5 @@
 fieldset {
-  /* align="center" */
+  /*align="center"*/
   display: block;
   margin-left: 5%;
   margin-right: 5%;
@@ -7,25 +7,63 @@ fieldset {
   /*border: 10px disabled (internal value);*/
   font-family: 'Cookie', cursive;
 }
+table {
+  width: 800px;
+}
+mat-tab-group{
+  width: 100%;
+  height: 50%;
+  color: black;
+  font-size: 50px;
+  overflow: auto;
+}
+.mat-elevation-z8{
+  width: 100%;
+  height: 100%;
+  color: black;
+  font-size: 50px;
+  overflow: auto;
+}
 example-container {
   height: 400px;
   width: 550px;
   overflow: auto;
 }
+.example-stretched-tabs {
+ max-width: 800px;
+ max-height: 800px;
+ overflow: auto;
+ width: 100%;
 
-table {
-  width: 800px;
 }
 .form {
-  min-width: 150px;
-  max-width: 500px;
+  /* min-width: 150px;
+  max-width: 500px; */
   width: 100%;
+  color: black;
+}
+
+.type_form{
+  align: center;
+  width: 20%;
+}
+.full-width{
   color: black;
 }
 .example-form {
   min-width: 150px;
   max-width: 500px;
   width: 100%;
+}
+.card {
+  width: 500px;
+}
+
+.panel1{
+  position: absolute;
+  float:left;
+  width: 100%;
+  background-color: #ffdec7;
 }
 .panel2{
   position: absolute;
@@ -45,11 +83,11 @@ mat-toolbar{
   opacity: 70%
 }
 .mat-elevation-z8{
-  width: 100%;
-  height: 50%;
+  width: 125%;
+  height: 100%;
   color: black;
   font-size: 50px;
-  overflow: auto;
+  /* overflow: auto; */
 }
 
 .button-row button,.button-row a {
@@ -58,3 +96,7 @@ mat-toolbar{
   background-color: #3e3e3e;
 }
 
+table {
+  width: 100%;
+  font-size: 20px ;
+}
